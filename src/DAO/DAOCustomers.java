@@ -1,0 +1,116 @@
+package DAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import POJO.Customers;
+
+public class DAOCustomers extends DAO<Customers> {
+
+	public DAOCustomers(Connection conn) {
+		super(conn);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean create(Customers obj) {
+		try{
+			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+               ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Customers "
+					+ "VALUES (obj.getCustomerNumber(),"
+					+ "obj.getCustomerName(),"
+					+ "obj.getContactLastName(),"
+					+ "obj.getContactFirstName(),"
+					+ "obj.getPhone(),"
+					+ "obj.getCity(),"
+					+ "obj.getState(),"
+					+ "obj.getPostalCode(),"
+					+ "obj.getCountry(),"
+					+ "obj.getSalesRepEmployeeNumber()");
+		}
+		catch(Exception e){
+			return false;
+	}
+		return true;
+	}
+
+	@Override
+	public boolean delete(Customers obj) {
+		try{
+			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE CustomerNumber ="
+							+ obj.getCustomerNumber());
+			return true;
+		}
+		catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+	}
+	}
+
+	@Override
+	public boolean update(Customers obj) {
+		try {
+            this .connect
+                 .createStatement(
+                	ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE
+                 ).executeUpdate(
+                	"UPDATE Customers SET customerName = '" + obj.getCustomerName() + "'"
+                					+ ", contactLastName = '"+obj.getContactLastName()+"'"
+                					+ ", contactFirstName = '"+obj.getContactFirstName()+"'"
+                					+ ", phone = '"+ obj.getPhone()+"'"
+                					+ ", city = '"+ obj.getCity()+"'"
+                					+ ", state = '"+obj.getState()+"'"
+                					+ ", postalCode = '"+obj.getPostalCode()+"'"
+                					+ ", country = '"+obj.getCountry()+ "'"
+                					+ ", salesRepEmployeeNumber = '"+obj.getSalesRepEmployeeNumber()
+                					+" WHERE customerNumber = '" + obj.getCustomerNumber()+"'"
+                 );
+		obj = this.find(obj.getCustomerNumber());
+		return true;
+    } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+    }
+}
+
+
+	@Override
+	public Customers find(int id) {
+
+		Customers customers = new Customers();
+
+		try{
+			ResultSet result = this.connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Customers where CustomerNumber = " + id);
+			if(result.first())
+				customers = new Customers(
+						id,
+						result.getString("customerName"),
+						result.getString("contactLastName"),
+						result.getString("contactFirstName"),
+						result.getString("phone"),
+						result.getString("city"),
+						result.getString("state"),
+						result.getString("postalCode"),
+						result.getString("country"),
+						result.getInt("salesRepEmployeeNumber")
+						);
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return customers;
+
+	}
+
+	@Override
+	public Customers read(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+
+
+
