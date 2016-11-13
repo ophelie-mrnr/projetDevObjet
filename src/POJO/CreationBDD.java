@@ -170,7 +170,7 @@ public class CreationBDD {
 		    stmt1.executeUpdate(sqlReactivateCheck);
 
 
-		    String pathFile = "SampleData2016_modif.sql" ;
+		    String pathFile = "SampleData2016.sql" ;
 		    InputStream ips;
 		    ips = new FileInputStream(pathFile);
 		    InputStreamReader ipsr= new InputStreamReader(ips);
