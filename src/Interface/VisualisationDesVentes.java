@@ -34,7 +34,7 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
         DateFinTextField = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
-        Valider = new javax.swing.JButton();
+        validerButton = new javax.swing.JButton();
         Ventes = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -91,10 +91,10 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu2);
 
-        Valider.setText("Valider");
-        Valider.addActionListener(new java.awt.event.ActionListener() {
+        validerButton.setText("Valider");
+        validerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ValiderActionPerformed(evt);
+                validerButtonActionPerformed(evt);
             }
         });
 
@@ -121,7 +121,7 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DateFinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(Valider))
+                        .addComponent(validerButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,7 +141,7 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
                     .addComponent(DateDebutTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DateFinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Valider))
+                    .addComponent(validerButton))
                 .addGap(18, 18, 18)
                 .addComponent(Ventes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
@@ -155,9 +155,9 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValiderActionPerformed
+    private void validerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ValiderActionPerformed
+    }//GEN-LAST:event_validerButtonActionPerformed
 
     private void DateFinTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateFinTextFieldActionPerformed
         // TODO add your handling code here:
@@ -212,7 +212,7 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DateDebutTextField;
     private javax.swing.JTextField DateFinTextField;
-    private javax.swing.JButton Valider;
+    private javax.swing.JButton validerButton;
     private javax.swing.JLabel Ventes;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
