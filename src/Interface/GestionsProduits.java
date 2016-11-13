@@ -53,7 +53,7 @@ public class GestionsProduits extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        MontrerButton = new javax.swing.JButton();
+        montrerButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLayeredPane2 = new javax.swing.JLayeredPane();
@@ -145,7 +145,7 @@ public class GestionsProduits extends javax.swing.JFrame {
         		public void mouseClicked(MouseEvent me) {
         		// TODO Auto-generated method stub
         		// on affiche le bouton "Montrer" quand nous selectionnons une ligne dans la Jtable
-        			MontrerButton.setVisible(true);
+        			montrerButton.setVisible(true);
         		// On instancie nos differentes variables utilisé pour le produit
         		String id;
         		String productName;
@@ -205,10 +205,10 @@ public class GestionsProduits extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        MontrerButton.setText("Montrer");
-        MontrerButton.addActionListener(new java.awt.event.ActionListener() {
+        montrerButton.setText("Montrer");
+        montrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MontrerButtonActionPerformed(evt);
+                montrerButtonActionPerformed(evt);
             }
         });
 
@@ -322,7 +322,7 @@ public class GestionsProduits extends javax.swing.JFrame {
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setVisible(false);
-        MontrerButton.setVisible(false);
+        montrerButton.setVisible(false);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,9 +435,19 @@ public class GestionsProduits extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Visualisations des ventes");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Visualisations libres");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -456,7 +466,7 @@ public class GestionsProduits extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
-                        .addComponent(MontrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(montrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -465,7 +475,7 @@ public class GestionsProduits extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(MontrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(montrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -474,9 +484,9 @@ public class GestionsProduits extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MontrerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MontrerButtonActionPerformed
+    private void montrerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_montrerButtonActionPerformed
     	jLayeredPane1.setVisible(true);
-    }//GEN-LAST:event_MontrerButtonActionPerformed
+    }//GEN-LAST:event_montrerButtonActionPerformed
 
   
     
@@ -494,7 +504,16 @@ public class GestionsProduits extends javax.swing.JFrame {
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1MouseClicked
+    
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2MouseClicked
 
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3MouseClicked
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -531,7 +550,7 @@ public class GestionsProduits extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton MontrerButton;
+    private javax.swing.JButton montrerButton;
     private javax.swing.JButton enregistrerButton;
     private javax.swing.JButton annulerButton;
     private javax.swing.JLabel jLabel1;

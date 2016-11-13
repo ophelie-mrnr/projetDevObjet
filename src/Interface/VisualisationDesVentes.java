@@ -5,6 +5,15 @@
  */
 package Interface;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+
+import DAO.DAOProducts;
+import DAO.MaConnexion;
+import POJO.Products;
+
 /**
  *
  * @author 21403486t
@@ -61,6 +70,13 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
                 DateFinTextFieldActionPerformed(evt);
             }
         });
+        
+        jMenu2.addMouseListener(new MouseAdapter(){
+    		public void mouseClicked(MouseEvent me) {
+    		// TODO Auto-generated method stub
+    		}			
+    	});
+        
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -90,7 +106,17 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(jMenu2);
+        
+        jMenu3.setText("Visualisations libres");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
 
+        setJMenuBar(jMenuBar1);
+        
         validerButton.setText("Valider");
         validerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +196,11 @@ public class VisualisationDesVentes extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3MouseClicked
+       
     
     
     /**

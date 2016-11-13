@@ -37,6 +37,8 @@ public class fenetre extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
+        setJMenuBar(jMenuBar1);
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Gestion des produits");
@@ -56,9 +58,14 @@ public class fenetre extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Visualisations libres");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
-        setJMenuBar(jMenuBar1);
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,10 +88,16 @@ public class fenetre extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
     
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        JFrame visualisation = new VisualisationDesVentes();
-        visualisation.setVisible(true);
+        JFrame visualisationVentes = new VisualisationDesVentes();
+        visualisationVentes.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenu2MouseClicked
+    
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        JFrame visualisationLibre = new VisualisationLibre();
+        visualisationLibre.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenu3MouseClicked
 
     /**
      * @param args the command line arguments
