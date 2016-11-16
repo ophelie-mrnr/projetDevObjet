@@ -6,7 +6,9 @@
 package Interface;
 
 import DAO.GO;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,6 +16,18 @@ import javax.swing.JFrame;
  */
 public class fenetre extends javax.swing.JFrame {
 
+    // Variables declaration
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel gestion;
+    private javax.swing.JPanel visualisationVentes;
+
+	private javax.swing.JPanel visualisationLibre;
+
+    // End of variables declaration
+	
     /**
      * Creates new form fenetre
      */
@@ -37,7 +51,16 @@ public class fenetre extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
+        gestion = new GestionsProduits();
+    	visualisationVentes = new VisualisationDesVentes();
+    	visualisationLibre = new VisualisationLibre();
+
+    	this.add(gestion);
+    	this.add(visualisationVentes);
+    	this.add(visualisationLibre);
+
         setJMenuBar(jMenuBar1);
+       
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +88,6 @@ public class fenetre extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu3);
 
-        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,27 +99,33 @@ public class fenetre extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 513, Short.MAX_VALUE)
         );
-
+        
+        
+        
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        JFrame gestion = new GestionsProduits();
-        gestion.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jMenu1MouseClicked
+    	gestion.setVisible(true);
+    	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
+    	this.setContentPane(gestion);
+    	this.revalidate();
+    }
     
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        JFrame visualisationVentes = new VisualisationDesVentes();
         visualisationVentes.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jMenu2MouseClicked
+    	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
+        this.setContentPane(visualisationVentes);
+    	this.revalidate();
+    }
     
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        JFrame visualisationLibre = new VisualisationLibre();
         visualisationLibre.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jMenu3MouseClicked
+    	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
+        this.setContentPane(visualisationLibre);
+    	this.revalidate();
+    }
 
     /**
      * @param args the command line arguments
@@ -133,11 +161,4 @@ public class fenetre extends javax.swing.JFrame {
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    // End of variables declaration//GEN-END:variables
 }
