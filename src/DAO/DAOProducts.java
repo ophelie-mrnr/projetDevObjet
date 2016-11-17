@@ -60,16 +60,15 @@ public class DAOProducts extends DAO<Products> {
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE
                  ).executeUpdate(
-                	"UPDATE Customers SET productName = '" + obj.getProductName()+ "'"
-                			+ ", productLine = '"+obj.getProductLine()+"'"
-        					+ ", photo = '"+obj.getPhoto()+"'"
-        					+ ", productVendor = '"+obj.getProductVendor()+"'"
-                			+ ", productDescription = '"+obj.getProductDescription()+"'"
-                			+ ", quantityInStock = '"+obj.getQuantityInStock()+"'"
-                			+ ", buyPrice = '"+obj.getBuyPrice()+"'"
-                			+ ", MSRP = '"+obj.getMSRP()
-                			+" WHERE productCode = '"+obj.getProductCode()+"'"
-                	
+                		 "UPDATE Products SET productName = '" + obj.getProductName()+ "'"
+                 		//	+ ", productLine = '"+obj.getProductLine()+"'"
+         					// + ", photo = '"+obj.getPhoto()+"'"
+         				//	+ ", productVendor = '"+obj.getProductVendor()+"'"
+                 			+ ", productDescription = '"+obj.getProductDescription()+"'"
+                 			+ ", quantityInStock = '"+obj.getQuantityInStock()+"'"
+                 			+ ", buyPrice = '"+obj.getBuyPrice()+"'"
+                 		//	+ ", MSRP = '"+obj.getMSRP()
+                 			+" WHERE productCode = '"+obj.getProductCode()+"'"
                  );
 		obj = this.read(obj.getProductLine());
 		return true;

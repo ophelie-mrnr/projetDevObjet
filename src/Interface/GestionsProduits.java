@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import DAO.DAOProducts;
 import DAO.MaConnexion;
@@ -51,14 +52,14 @@ public class GestionsProduits extends javax.swing.JPanel {
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        MontrerButton = new javax.swing.JButton();
+        montrerButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        enregistrerButton = new javax.swing.JButton();
+        annulerButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         DescriptionRes = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
@@ -77,111 +78,19 @@ public class GestionsProduits extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        java.sql.Statement statePC;
-        java.sql.Statement statePN;
-        java.sql.Statement stateQ;
-        java.sql.Statement stateB;
-        	try {
-        		 // Liste des product Code
-			statePC = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			String queryPC = "SELECT productCode FROM Products";
-	        ResultSet resPC =statePC.executeQuery(queryPC);	
-	        
-
-    		Products produit = new Products();
-    		DAOProducts dao_product = new DAOProducts(MaConnexion.getInstance());
-    		
-	        ArrayList<String> listePC = new ArrayList<String>(); 
-	        ArrayList<String> listePN = new ArrayList<String>(); 
-	        ArrayList<String> listeQ = new ArrayList<String>(); 
-	        ArrayList<String> listeB = new ArrayList<String>(); 
-	        
-	        
-	        while (resPC.next()){
-	        	String resultat = resPC.getString("productCode");
-	        	listePC.add(resultat);
-	        	String productName = dao_product.read(resultat).getProductName();
-	        	String quantity = ""+dao_product.read(resultat).getQuantityInStock();
-	        	String prix = ""+dao_product.read(resultat).getBuyPrice();
-	        	listePN.add(productName);
-	        	listeQ.add(quantity);
-	        	listeB.add(prix);
-	        }	
-	        tableauProductCode = new String[listePC.size()];
-	        tableauProductName = new String[listePC.size()];
-	        tableauQuantityInStock = new String[listePC.size()];
-	        tableauBuyPrice = new String[listeB.size()];
-	        for(int i = 0; i < listeQ.size(); i++){
-	        	tableauProductCode[i] = listePC.get(i);
-	        	tableauProductName[i] = listePN.get(i);
-	        	tableauQuantityInStock[i] = listeQ.get(i);
-	            tableauBuyPrice[i] = listeB.get(i);
-	        }
-	        
-            tabstring = new String[tableauProductCode.length][4];
-	        for(int i = 0 ; i < tableauProductCode.length ; i++){
-	        	tabstring[i][0] = tableauProductCode[i] ;
-	        	tabstring[i][1] = tableauProductName[i] ;
-	        	tabstring[i][2] = tableauQuantityInStock[i] ;
-	        	tabstring[i][3] = tableauBuyPrice[i] ;
-	        }
-	        
-	        
-	        
-	        
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+   
+        
         	jTable1.addMouseListener(new MouseAdapter(){
         		public void mouseClicked(MouseEvent me) {
-        		// TODO Auto-generated method stub
-        		// on affiche le bouton "Montrer" quand nous selectionnons une ligne dans la Jtable
-        			MontrerButton.setVisible(true);
-        		// On instancie nos differentes variables utilisÈ pour le produit
-        		String id;
-        		String productName;
-        		String productLine;
-        		ImageIcon photo;
-        		String productVendor;
-        		String productDescription;
-        		int quantityInStock;
-        		double buyPrice;
-        		double MSRP;
-        		Products produit = new Products();
-        		DAOProducts dao_product = new DAOProducts(MaConnexion.getInstance());
         		
-        		// nous recupperons le product Code du produit selectionnÈ dans la jtable
-        		id =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
-        		
-        		// On rÈcupÈre dans la base de donnÈes le produit liÈ au productCode rÈcupÈrÈ
-        		produit = dao_product.read(id);
-        		
-        		// On donne les valeur aux variable
-        		productName = produit.getProductName();
-        		productLine = produit.getProductLine();
-        		photo = produit.getPhoto();
-        		productVendor = produit.getProductVendor();
-        		productDescription = produit.getProductDescription();
-        		quantityInStock = produit.getQuantityInStock();
-        		buyPrice = produit.getBuyPrice();
-        		MSRP = produit.getMSRP();
-        		
-        		// On donne les valeurs rÈcupÈrer aux objets
-        		CodeProduitResultat.setText(id);
-        		PriceRes.setText(""+buyPrice);
-        		fournisseurRes.setText(productVendor);
-        		ProductLinesDesRes.setText(productLine);
-        		productNameResultat.setText(productName);
-        		MSRPREs.setText(""+MSRP);
-        		QuantityInStockRes.setText(""+quantityInStock);
-        		DescriptionRes.setText(productDescription);
-        		jLabel14.setIcon(photo);
-        		}			
-        		});
+        			afficherProduit();
+        		}
+        	}
+        
+        		);
         	
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            tabstring,
+            creationJtable(),
             new String [] {
                 "Code du produit", "Nom du produit", "Quantit» en stock", "Prix d'achat"
             }
@@ -197,10 +106,10 @@ public class GestionsProduits extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        MontrerButton.setText("Montrer");
-        MontrerButton.addActionListener(new java.awt.event.ActionListener() {
+        montrerButton.setText("Montrer");
+        montrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	MontrerButtonActionPerformed(evt);
+            	montrerButtonActionPerformed(evt);
             }
         });
 
@@ -209,24 +118,24 @@ public class GestionsProduits extends javax.swing.JPanel {
 
         jLabel13.setText("Photo");
 
-        jButton3.setText("Annuler");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        annulerButton.setText("Annuler");
+        annulerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                annulerButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Enregistrer");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        enregistrerButton.setText("Enregistrer");
+        enregistrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                enregistrerButtonActionPerformed(evt);
             }
         });
 
         jLayeredPane2.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(enregistrerButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(annulerButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -242,9 +151,9 @@ public class GestionsProduits extends javax.swing.JPanel {
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2)
+                        .addComponent(enregistrerButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(annulerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(157, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -256,8 +165,8 @@ public class GestionsProduits extends javax.swing.JPanel {
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(annulerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enregistrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         DescriptionRes.setColumns(20);
@@ -291,7 +200,7 @@ public class GestionsProduits extends javax.swing.JPanel {
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setVisible(false);
-        MontrerButton.setVisible(false);
+        montrerButton.setVisible(false);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
                 jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +335,7 @@ public class GestionsProduits extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(359, 359, 359)
-                        .addComponent(MontrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(montrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -435,30 +344,159 @@ public class GestionsProduits extends javax.swing.JPanel {
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(MontrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(montrerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
-    private void MontrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void montrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
     	jLayeredPane1.setVisible(true);
     }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void enregistrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    	// enregistrerButton = Enregistrer
+    	DAOProducts d_p = new DAOProducts(MaConnexion.getInstance());
+
+    	Products prod = new Products();
+    	prod.setBuyPrice(Double.parseDouble(PriceRes.getText().toString()));
+    	prod.setProductName(productNameResultat.getText().toString());
+    	prod.setQuantityInStock(Integer.parseInt(QuantityInStockRes.getText().toString()));
+    	prod.setProductDescription(DescriptionRes.getText());
+    	System.out.println("ok");
+    	prod.setProductCode(CodeProduitResultat.getText().toString());
+    	d_p.update(prod);
+    	System.out.println(prod.getProductName());
+    	jLayeredPane1.setVisible(false);
+    	montrerButton.setVisible(false);
+    	jTable1.setVisible(false);    	
+    	 jTable1.setModel(new javax.swing.table.DefaultTableModel(
+    	            creationJtable(),new String [] {
+    	                "Code du produit", "Nom du produit", "Quantit» en stock", "Prix d'achat"
+    	            }
+    	        ));
+    	 jTable1.setVisible(true);
+    	//JPanel nouvelle = new GestionsProduits();
+       //	nouvelle.setVisible(true);
     }                                        
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    	// enregistrerButton = Annuler
+    	afficherProduit();
     }                                        
 
+    private static String productName;
+    
+    private void afficherProduit(){
+  // TODO Auto-generated method stub
+ 	// on affiche le bouton "Montrer" quand nous selectionnons une ligne dans la Jtable
+ 		montrerButton.setVisible(true);
+ 	// On instancie nos differentes variables utilis√© pour le produit
+ 	String id;
+ 	String productLine;
+ 	ImageIcon photo;
+ 	String productVendor;
+ 	String productDescription;
+ 	int quantityInStock;
+ 	double buyPrice;
+ 	double MSRP;
+ 	Products produit = new Products();
+ 	DAOProducts dao_product = new DAOProducts(MaConnexion.getInstance());
+
+ 	// nous recupperons le product Code du produit selectionn√© dans la jtable
+ 	id =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+
+ 	// On r√©cup√©re dans la base de donn√©es le produit li√© au productCode r√©cup√©r√©
+ 	produit = dao_product.read(id);
+
+ 	// On donne les valeur aux variable
+ 	productName = produit.getProductName();
+ 	productLine = produit.getProductLine();
+ 	photo = produit.getPhoto();
+ 	productVendor = produit.getProductVendor();
+ 	productDescription = produit.getProductDescription();
+ 	quantityInStock = produit.getQuantityInStock();
+ 	buyPrice = produit.getBuyPrice();
+ 	MSRP = produit.getMSRP();
+
+ 	// On donne les valeurs r√©cup√©rer aux objets
+ 	CodeProduitResultat.setText(id);
+ 	PriceRes.setText(""+buyPrice);
+ 	fournisseurRes.setText(productVendor);
+ 	ProductLinesDesRes.setText(productLine);
+ 	productNameResultat.setText(productName);
+ 	MSRPREs.setText(""+MSRP);
+ 	QuantityInStockRes.setText(""+quantityInStock);
+ 	DescriptionRes.setText(productDescription);
+ 	jLabel14.setIcon(photo);
+
+    }
+    
+    public String[][] creationJtable(){
+    	
+        java.sql.Statement statePC;
+        java.sql.Statement statePN;
+        java.sql.Statement stateQ;
+        java.sql.Statement stateB;
+        
+    	try {
+    		 // Liste des product Code
+		statePC = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		String queryPC = "SELECT productCode FROM Products";
+        ResultSet resPC =statePC.executeQuery(queryPC);	
+        
+
+		Products produit = new Products();
+		DAOProducts dao_product = new DAOProducts(MaConnexion.getInstance());
+		
+        ArrayList<String> listePC = new ArrayList<String>(); 
+        ArrayList<String> listePN = new ArrayList<String>(); 
+        ArrayList<String> listeQ = new ArrayList<String>(); 
+        ArrayList<String> listeB = new ArrayList<String>(); 
+        
+        
+        while (resPC.next()){
+        	String resultat = resPC.getString("productCode");
+        	listePC.add(resultat);
+        	String productName = dao_product.read(resultat).getProductName();
+        	String quantity = ""+dao_product.read(resultat).getQuantityInStock();
+        	String prix = ""+dao_product.read(resultat).getBuyPrice();
+        	listePN.add(productName);
+        	listeQ.add(quantity);
+        	listeB.add(prix);
+        }	
+        tableauProductCode = new String[listePC.size()];
+        tableauProductName = new String[listePC.size()];
+        tableauQuantityInStock = new String[listePC.size()];
+        tableauBuyPrice = new String[listeB.size()];
+        for(int i = 0; i < listeQ.size(); i++){
+        	tableauProductCode[i] = listePC.get(i);
+        	tableauProductName[i] = listePN.get(i);
+        	tableauQuantityInStock[i] = listeQ.get(i);
+            tableauBuyPrice[i] = listeB.get(i);
+        }
+        
+        tabstring = new String[tableauProductCode.length][4];
+        for(int i = 0 ; i < tableauProductCode.length ; i++){
+        	tabstring[i][0] = tableauProductCode[i] ;
+        	tabstring[i][1] = tableauProductName[i] ;
+        	tabstring[i][2] = tableauQuantityInStock[i] ;
+        	tabstring[i][3] = tableauBuyPrice[i] ;
+        }
+        
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		return tabstring;
+    }
+    
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton MontrerButton;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton montrerButton;
+    private javax.swing.JButton enregistrerButton;
+    private javax.swing.JButton annulerButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel MSRPREs;
