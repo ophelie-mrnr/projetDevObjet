@@ -5,6 +5,13 @@
  */
 package Interface;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import DAO.DAOProducts;
+import DAO.MaConnexion;
+
 /**
  *
  * @author Ophelie
@@ -21,6 +28,8 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+
+    private String[] tab;
     
     
     // End of variables declaration  
@@ -53,12 +62,12 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
 
         jLabel1.setText("Pays");
 
-        jLabel2.setText("Date de début");
+        jLabel2.setText("Date de dï¿½but");
 
         jLabel3.setText("Date de fin");
 
         DateDebutTextField.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        DateDebutTextField.setText("Rentrez date de début");
+        DateDebutTextField.setText("Rentrez date de dï¿½but");
 
         DateFinTextField.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         DateFinTextField.setText("Rentrez date de fin");
@@ -68,7 +77,9 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(creationComboBox()));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,5 +157,37 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-    }                                                        
+    } 
+    
+
+    public String[] creationComboBox(){
+    	
+        java.sql.Statement state;
+        
+    	try {
+    		 // Liste des product Code
+		state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		String query = "SELECT DISTINCT country FROM customers;";
+        ResultSet res =state.executeQuery(query);	
+        
+        ArrayList<String> liste = new ArrayList<String>(); 
+        
+        
+        while (res.next()){
+        	String resultat = res.getString("country");
+        	liste.add(resultat);
+        }	
+        tab = new String[liste.size()+1];
+        tab[0]= "All";
+        for(int i = 0; i < liste.size(); i++){
+        	tab[i+1] = liste.get(i);
+        }
+        
+        
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		return tab;
+    }
 }
