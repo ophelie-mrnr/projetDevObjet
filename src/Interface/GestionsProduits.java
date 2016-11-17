@@ -5,7 +5,6 @@
  */
 package Interface;
 
-import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -13,10 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import DAO.DAOProducts;
 import DAO.MaConnexion;
@@ -49,7 +44,6 @@ public class GestionsProduits extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         montrerButton = new javax.swing.JButton();
@@ -92,7 +86,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             creationJtable(),
             new String [] {
-                "Code du produit", "Nom du produit", "QuantitÈ en stock", "Prix d'achat"
+                "Code du produit", "Nom du produit", "Quantitï¿½ en stock", "Prix d'achat"
             }
 
         ) {
@@ -181,7 +175,7 @@ public class GestionsProduits extends javax.swing.JPanel {
 
         PriceRes.setText("");
 
-        jLabel3.setText("Quantité en stock :");
+        jLabel3.setText("Quantitï¿½ en stock :");
 
         jLabel5.setText("ProductLines.TextDescription :");
 
@@ -357,28 +351,42 @@ public class GestionsProduits extends javax.swing.JPanel {
 
     private void enregistrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	// enregistrerButton = Enregistrer
-    	DAOProducts d_p = new DAOProducts(MaConnexion.getInstance());
 
+    	DAOProducts d_p = new DAOProducts(MaConnexion.getInstance());
     	Products prod = new Products();
+    	String id2 =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+    	prod = d_p.read(id2);
+
+    	String productLineNew = prod.getProductLine();
+    	String productVendorNew = prod.getProductVendor();
+    	double MSRPNew = prod.getMSRP();
+
+    	// Champs modifiables
     	prod.setBuyPrice(Double.parseDouble(PriceRes.getText().toString()));
     	prod.setProductName(productNameResultat.getText().toString());
     	prod.setQuantityInStock(Integer.parseInt(QuantityInStockRes.getText().toString()));
     	prod.setProductDescription(DescriptionRes.getText());
-    	System.out.println("ok");
+
+
+    	// Champs non modifiables
+    	prod.setProductLine(productLineNew);
+    	prod.setProductVendor(productVendorNew);
+    	prod.setMSRP(MSRPNew);
+
     	prod.setProductCode(CodeProduitResultat.getText().toString());
     	d_p.update(prod);
-    	System.out.println(prod.getProductName());
+
+    	// reinitialisation de la fenÃªtre
     	jLayeredPane1.setVisible(false);
     	montrerButton.setVisible(false);
     	jTable1.setVisible(false);    	
     	 jTable1.setModel(new javax.swing.table.DefaultTableModel(
     	            creationJtable(),new String [] {
-    	                "Code du produit", "Nom du produit", "QuantitÈ en stock", "Prix d'achat"
+    	                "Code du produit", "Nom du produit", "Quantitï¿½ en stock", "Prix d'achat"
     	            }
     	        ));
     	 jTable1.setVisible(true);
-    	//JPanel nouvelle = new GestionsProduits();
-       //	nouvelle.setVisible(true);
+    	
     }                                        
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -435,19 +443,14 @@ public class GestionsProduits extends javax.swing.JPanel {
     
     public String[][] creationJtable(){
     	
-        java.sql.Statement statePC;
-        java.sql.Statement statePN;
-        java.sql.Statement stateQ;
-        java.sql.Statement stateB;
+        java.sql.Statement state;
         
     	try {
     		 // Liste des product Code
-		statePC = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		String queryPC = "SELECT productCode FROM Products";
-        ResultSet resPC =statePC.executeQuery(queryPC);	
+        ResultSet resPC =state.executeQuery(queryPC);	
         
-
-		Products produit = new Products();
 		DAOProducts dao_product = new DAOProducts(MaConnexion.getInstance());
 		
         ArrayList<String> listePC = new ArrayList<String>(); 
@@ -513,12 +516,7 @@ public class GestionsProduits extends javax.swing.JPanel {
     private javax.swing.JLabel fournisseurRes;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

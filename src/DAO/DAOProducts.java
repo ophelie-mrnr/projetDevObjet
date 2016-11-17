@@ -55,28 +55,31 @@ public class DAOProducts extends DAO<Products> {
 	@Override
 	public boolean update(Products obj) {
 		try {
-            this .connect	
+
+			System.out.println("BEGIN UPDATE");
+            this.connect
                  .createStatement(
-                	ResultSet.TYPE_SCROLL_INSENSITIVE, 
+                	ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_UPDATABLE
                  ).executeUpdate(
-                		 "UPDATE Products SET productName = '" + obj.getProductName()+ "'"
-                 		//	+ ", productLine = '"+obj.getProductLine()+"'"
-         					// + ", photo = '"+obj.getPhoto()+"'"
-         				//	+ ", productVendor = '"+obj.getProductVendor()+"'"
-                 			+ ", productDescription = '"+obj.getProductDescription()+"'"
-                 			+ ", quantityInStock = '"+obj.getQuantityInStock()+"'"
-                 			+ ", buyPrice = '"+obj.getBuyPrice()+"'"
-                 		//	+ ", MSRP = '"+obj.getMSRP()
-                 			+" WHERE productCode = '"+obj.getProductCode()+"'"
+                	"UPDATE Products SET productName = '" + obj.getProductName()+ "'"
+                			+ ", productLine = '"+obj.getProductLine()+"'"
+        					// + ", photo = '"+obj.getPhoto()+"'"
+        					+ ", productVendor = '"+obj.getProductVendor()+"'"
+                			+ ", productDescription = '"+obj.getProductDescription()+"'"
+                			+ ", quantityInStock = '"+obj.getQuantityInStock()+"'"
+                			+ ", buyPrice = '"+obj.getBuyPrice()+"'"
+                			+ ", MSRP = "+obj.getMSRP()			// problËme : il y avait une ' en trop alors que c'est un double
+                			+" WHERE productCode = '"+obj.getProductCode()+"'"
+
                  );
 		obj = this.read(obj.getProductLine());
 		return true;
-    } catch (SQLException e) {
+		} catch (SQLException e) {
             e.printStackTrace();
             return false;
-    }
-}	
+    	}
+	}
 
 	@Override
 	public Products find(int id) {
