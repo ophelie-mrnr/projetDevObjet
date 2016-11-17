@@ -11,6 +11,20 @@ package Interface;
  */
 public class VisualisationDesVentes extends javax.swing.JPanel {
 
+	// Variables declaration                     
+    private javax.swing.JTextField DateDebutTextField;
+    private javax.swing.JTextField DateFinTextField;
+    private javax.swing.JButton Valider;
+    private javax.swing.JLabel Ventes;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    
+    
+    // End of variables declaration  
+    
     /**
      * Creates new form NewJPanel
      */
@@ -132,18 +146,5 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
 
     private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-    }                                       
-
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JTextField DateDebutTextField;
-    private javax.swing.JTextField DateFinTextField;
-    private javax.swing.JButton Valider;
-    private javax.swing.JLabel Ventes;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration                   
+    }                                                        
 }
