@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interface;
 
 /**
@@ -15,7 +10,6 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
     private javax.swing.JTextField DateDebutTextField;
     private javax.swing.JTextField DateFinTextField;
     private javax.swing.JButton Valider;
-    private javax.swing.JLabel Ventes;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -49,7 +43,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         Valider = new javax.swing.JButton();
-        Ventes = new javax.swing.JLabel();
+    
 
         jLabel1.setText("Pays");
 
@@ -88,8 +82,6 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
             }
         });
 
-        Ventes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Ventes.setText("Ventes ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -116,8 +108,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
                         .addGap(45, 45, 45)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(Ventes)))
+                        .addGap(319, 319, 319)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,7 +124,6 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Valider))
                 .addGap(18, 18, 18)
-                .addComponent(Ventes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
