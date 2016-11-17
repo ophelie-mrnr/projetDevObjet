@@ -75,7 +75,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel implements Action
         validerButton.setText("Valider");
         validerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	validerButtonActionPerformed(evt);
+            	actionPerformed(evt);
             }
         });
 
@@ -129,21 +129,16 @@ public class VisualisationDesVentes extends javax.swing.JPanel implements Action
 
     private void DateFinTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                 
        
-    }                                                
-
-    private void validerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                        
-    	// A FAIRE   	
+    }                                                              
+    
+	
+	public void actionPerformed(ActionEvent evt) {
+		// A FAIRE   	
     	/*
     	 * if (Country) 
     	 */   	
     	jPanelGraphe.setVisible(true);
     	System.out.println("clique sur bouton validerButton.");
-    }                
-    
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}  
 }
