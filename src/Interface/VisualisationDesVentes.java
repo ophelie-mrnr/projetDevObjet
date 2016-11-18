@@ -1,6 +1,7 @@
 package Interface;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.File;
@@ -32,10 +33,15 @@ import Interface.*;
  */
 public class VisualisationDesVentes extends javax.swing.JPanel {
 =======
+=======
+>>>>>>> origin/master
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VisualisationDesVentes extends javax.swing.JPanel implements ActionListener{
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
 	// Variables declaration                     
@@ -80,7 +86,10 @@ public class VisualisationDesVentes extends javax.swing.JPanel implements Action
         validerButton = new javax.swing.JButton();
         jPanelGraphe = new javax.swing.JPanel();
         
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
     	tsp = new TimeSeriePanel("Sales :");
     	chartPanel = tsp.cp;
@@ -172,6 +181,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel implements Action
 
     private void DateFinTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                 
 <<<<<<< HEAD
+<<<<<<< HEAD
         // TODO add your handling code here:
     }                                                
 
@@ -245,6 +255,8 @@ public class VisualisationDesVentes extends javax.swing.JPanel implements Action
 		
 }
 =======
+=======
+>>>>>>> origin/master
        
     }                                                              
     
@@ -258,5 +270,9 @@ public class VisualisationDesVentes extends javax.swing.JPanel implements Action
     	System.out.println("clique sur bouton validerButton.");
 		
 	}  
+<<<<<<< HEAD
+}
+>>>>>>> origin/master
+=======
 }
 >>>>>>> origin/master
