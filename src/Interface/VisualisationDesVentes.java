@@ -81,11 +81,11 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		jLabel3.setText("Date de fin");
 
 		DateDebutTextField.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-		DateDebutTextField.setText("jj/mm/aaaa");	
+		DateDebutTextField.setText("aaaa-mm-jj");	
 		DateDebutTextField.setPreferredSize( new Dimension( 100, 24 ) );
 
 		DateFinTextField.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-		DateFinTextField.setText("jj/mm/aaaa");
+		DateFinTextField.setText("aaaa-mm-jj");
 		DateFinTextField.setPreferredSize( new Dimension( 100, 24 ) );
 
 		jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(creationComboBox()));
