@@ -9,10 +9,8 @@ public class DAOCustomers extends DAO<Customers> {
 
 	public DAOCustomers(Connection conn) {
 		super(conn);
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public boolean create(Customers obj) {
 		try{
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -34,7 +32,6 @@ public class DAOCustomers extends DAO<Customers> {
 		return true;
 	}
 
-	@Override
 	public boolean delete(Customers obj) {
 		try{
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -48,7 +45,6 @@ public class DAOCustomers extends DAO<Customers> {
 	}
 	}
 
-	@Override
 	public boolean update(Customers obj) {
 		try {
             this .connect
@@ -76,7 +72,6 @@ public class DAOCustomers extends DAO<Customers> {
 }
 
 
-	@Override
 	public Customers find(int id) {
 
 		Customers customers = new Customers();
@@ -105,9 +100,8 @@ public class DAOCustomers extends DAO<Customers> {
 
 	}
 
-	@Override
+
 	public Customers read(String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -12,10 +12,11 @@ import javax.swing.ImageIcon;
 import POJO.Products;
 
 public class DAOProducts extends DAO<Products> {
+	
 	BufferedImage img;
+	
 	public DAOProducts(Connection conn) {
 		super(conn);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean create(Products obj) {
@@ -38,7 +39,6 @@ public class DAOProducts extends DAO<Products> {
 		return true;
 	}
 
-	@Override
 	public boolean delete(Products obj) {
 		try{
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -49,10 +49,9 @@ public class DAOProducts extends DAO<Products> {
 		catch (SQLException e) {
             e.printStackTrace();
             return false;
-	}
+		}
 	}
 
-	@Override
 	public boolean update(Products obj) {
 		try {
 
@@ -81,13 +80,10 @@ public class DAOProducts extends DAO<Products> {
     	}
 	}
 
-	@Override
 	public Products find(int id) {
 		return null;
 	}
 
-
-	@Override
 	public Products read(String id) {
 		Products product = new Products();
 		ImageIcon icon = null;
@@ -118,12 +114,8 @@ public class DAOProducts extends DAO<Products> {
 			}
 		} catch(SQLException | IOException e){
 			e.printStackTrace();
-
 		}
 		return product;
-
 	}
-
-
 }
 

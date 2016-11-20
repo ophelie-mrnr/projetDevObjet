@@ -1,9 +1,6 @@
 package Interface;
 
-
 import java.awt.Font;
-
-import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -11,15 +8,13 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.ui.RefineryUtilities;
 
 
 public class GraphePieChart  {
 
-//	
 	private ChartPanel cp ; 
-public ChartPanel getCp() {
+	
+	public ChartPanel getCp() {
 		return cp;
 	}
 
@@ -84,7 +79,5 @@ public ChartPanel getCp() {
     	JFreeChart chart = createChart(createDataset());
 		cp = new ChartPanel(chart);
     }
-    
-
 	
 }

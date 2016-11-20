@@ -1,15 +1,7 @@
 package POJO;
 
-import DAO.*;
-
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class CreationBDD {
 	
@@ -17,16 +9,14 @@ public class CreationBDD {
 
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;
 	public static final String USER = "root" ;
-	public static final String PASS = "root" ;
+	public static final String PASS = "" ;
 	
 	public static Statement stmt1 = null;
 
 	public CreationBDD(){
 
-
 		Connection conn = null ;
 		Statement stmt = null ;
-
 
 		try {
 			//STEP 1: Register JDBC driver
@@ -34,7 +24,7 @@ public class CreationBDD {
 			//STEP 2: Open a connection
 			System. out.println( "Connecting to database..." );
 			conn = DriverManager. getConnection( DB_URL, USER, PASS);
-			System.out.println("connexion �tablie ");
+			System.out.println("connexion etablie ");
 			//STEP 3: Execute a query
 			System. out.println( "Creating database..." );
 			stmt = conn.createStatement();
@@ -43,7 +33,7 @@ public class CreationBDD {
 			//suppression de la base de donn�e
 			String q = "DROP DATABASE IF EXISTS schemadevobj";
 			stmt.executeUpdate(q);
-			System. out.println( "BD supprim�e ! " );
+			System. out.println( "BD supprimee ! " );
 
 
 
@@ -74,7 +64,6 @@ public class CreationBDD {
 		            "CONSTRAINT customers_fk_emplnumb FOREIGN KEY (salesRepEmployeeNumber)"+
 		            "REFERENCES employees (employeeNumber)"+
 		             ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
-
 
 
 		    String sql2 = "CREATE TABLE `offices` ("+
@@ -112,7 +101,6 @@ public class CreationBDD {
 		            ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 
-
 		    String sql5 = "CREATE TABLE `orders`("+
 		    		"`orderNumber` INT(11) NOT NULL,"+
 		            "`orderDate` DATE NOT NULL,"+
@@ -126,6 +114,7 @@ public class CreationBDD {
 		            "CONSTRAINT `orders_fk_customerNumber` FOREIGN KEY (`customerNumber`)REFERENCES `customers` (`customerNumber`)"+
 		            ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+		    
 		    String sql6 = "CREATE TABLE `orderdetails`("+
 		    		"`orderNumber` INT(11) NOT NULL,"+
 		            "`productCode` VARCHAR(15) NOT NULL,"+
@@ -136,6 +125,7 @@ public class CreationBDD {
 		            "CONSTRAINT `orderdetails_fk_product` FOREIGN KEY (`productcode`)REFERENCES `products` (`productCode`)"+
 		            ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+		    
      	    String sql7 = "CREATE TABLE `products`("+
 		    		"`productCode` VARCHAR(15) NOT NULL,"+
 		            "`productName` VARCHAR(70) NOT NULL,"+
@@ -151,6 +141,7 @@ public class CreationBDD {
 		            "CONSTRAINT `products_fk_productlines` FOREIGN KEY (`productLine`)REFERENCES `productlines` (`productLine`)"+
 		            ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
+     	    
 		    String sql8 = "CREATE TABLE `productlines`("+
 		    		"`productLine` VARCHAR(50) NOT NULL,"+
 		            "`textDescription` VARCHAR(4000) NOT NULL,"+
@@ -186,11 +177,6 @@ public class CreationBDD {
 		    	}
 		    }
 		    }
-		    DAOCustomers dao_customer = new DAOCustomers(conn1);
-			String nomdumec;
-			nomdumec = dao_customer.find(167).getCustomerName();
-			System.out.println("L'id est : "+ nomdumec);
-
 		    br.close();
 
 		} catch (SQLException se){
@@ -213,10 +199,6 @@ public class CreationBDD {
 			} //end finally try
 		} //end try
 		System. out.println( "Goodbye!" );
-
-
 	}
-	
-
 
 }

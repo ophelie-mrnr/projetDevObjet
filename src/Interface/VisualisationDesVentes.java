@@ -2,38 +2,17 @@ package Interface;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.ui.ExtensionFileFilter;
 
 import DAO.*;
-import POJO.CreationBDD;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 public class VisualisationDesVentes extends javax.swing.JPanel{
 
@@ -64,7 +43,6 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 	}
 
 
-	@SuppressWarnings("unchecked")
 	private void initComponents() {
 
 		jLabel1 = new javax.swing.JLabel();
@@ -134,32 +112,26 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 				annulerActionPerformed(evt);
 			}
 		});
-	}// </editor-fold>                       
+	}                      
 
 	private void validerActionPerformed(java.awt.event.ActionEvent evt) {                                        
-		// TODO add your handling code here:
 		donneesChartPanel();
 		chartPanel.setVisible(true);
-
 	} 
 
 	private void annulerActionPerformed(java.awt.event.ActionEvent evt) {                                        
-		// TODO add your handling code here:
 		tsp.clean();
 		chartPanel.setVisible(true);
-
 	} 
-
 	    
 	private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {                                        
-	  			try {
-	  				// doSaveAs ouvre d'elle même un jFileChooser
-					chartPanel.doSaveAs();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	      }
+	  		try {
+	  			// doSaveAs ouvre d'elle même un jFileChooser
+				chartPanel.doSaveAs();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	 }
 
 
 public String[] creationComboBox(){
@@ -187,7 +159,6 @@ public String[] creationComboBox(){
 
 
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	return tab;

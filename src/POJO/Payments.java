@@ -49,5 +49,4 @@ public class Payments {
 		this.amount = amount;
 	}
 
-
 }

@@ -45,7 +45,6 @@ public class TimeSeriePanel{
 		java.sql.Statement state2;
 		ArrayList<String> liste = new ArrayList<String>(); 
 
-		int prix=0;
 		int revenu =0;
 
 		int jourDeb =0 , moisDeb =0 , anneeDeb=0, jourFin=0, moisFin=0, anneeFin=0;
@@ -121,7 +120,6 @@ public class TimeSeriePanel{
 					}
 				} 
 				catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -204,7 +202,6 @@ public class TimeSeriePanel{
 						}
 					} 
 					catch (SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
@@ -220,14 +217,11 @@ public class TimeSeriePanel{
 				}
 			}
 			catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return timeSeries;
 	}
-
-
 
 
 	public static JFreeChart createTimeChart(TimeSeriesCollection dataset, String title){
@@ -236,9 +230,7 @@ public class TimeSeriePanel{
 				"Dates",
 				"Ventes",
 				dataset);
-
 		return chart;
-
 	}
 
 	// Permet de convertir le jour en int
@@ -257,7 +249,6 @@ public class TimeSeriePanel{
 		// Conversion en int
 		int j = Integer.parseInt(jour); 
 		return j;
-
 	}
 
 	// Permet de convertir le mois en int
@@ -337,6 +328,5 @@ public class TimeSeriePanel{
 		}
 		return dateToString(j,m,a);
 	}
-
 
 }

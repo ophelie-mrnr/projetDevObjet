@@ -9,10 +9,7 @@ public class DAOProductlines extends DAO<Productlines> {
 
 	public DAOProductlines(Connection conn) {
 		super(conn);
-		// TODO Auto-generated constructor stub
 	}
-
-	@Override
 		
 	public boolean create(Productlines obj) {
 		try{
@@ -27,7 +24,6 @@ public class DAOProductlines extends DAO<Productlines> {
 		return true;
 	}
 
-	@Override
 	public boolean delete(Productlines obj) {
 		try{
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -38,10 +34,9 @@ public class DAOProductlines extends DAO<Productlines> {
 		catch (SQLException e) {
             e.printStackTrace();
             return false;
-	}
+		}
 	}
 
-	@Override
 	public boolean update(Productlines obj) {
 		try {
             this .connect	
@@ -61,13 +56,10 @@ public class DAOProductlines extends DAO<Productlines> {
     }
 }	
 
-	@Override
 	public Productlines find(int id) {
 		return null;
-
 	}
 
-	@Override
 	public Productlines read(String id) {
 		Productlines productline = new Productlines();
 

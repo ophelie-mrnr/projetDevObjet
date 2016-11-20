@@ -9,23 +9,8 @@ import POJO.*;
 public class GO {
 
 	public GO(){
-		// TODO Auto-generated method stub
 		
-		new CreationBDD();
-	    DAOCustomers dao_customer = new DAOCustomers(MaConnexion.getInstance());
-	    
-	    /* TESTS
-		int iddumec;
-		iddumec = dao_customer.find(167).getCustomerNumber();
-		System.out.println("L'id est :"+ iddumec);
-		
-		DAOProducts dao_products = new DAOProducts(MaConnexion.getInstance());
-		String productName = dao_products.read("S10_1949").getProductName();
-		System.out.println("product name : "+productName);
-		String BuyPrice = ""+dao_products.read("S10_1949").getBuyPrice();
-		System.out.println("prix : "+BuyPrice);
-		*/
-		
+		new CreationBDD();		
 		java.sql.Statement state;
 		try {
 			
@@ -45,7 +30,6 @@ public class GO {
 	        }
 	        
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

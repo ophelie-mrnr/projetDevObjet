@@ -58,5 +58,4 @@ public class Orderdetails {
 		this.orderLineNumber = orderLineNumber;
 	}
 
-
 }

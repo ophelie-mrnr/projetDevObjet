@@ -32,5 +32,4 @@ public class Productlines {
 		this.textDescription = textDescription;
 	}
 
-
 }

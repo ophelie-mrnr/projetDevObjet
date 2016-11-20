@@ -78,5 +78,4 @@ public class Orders {
 		this.customerNumber = customerNumber;
 	}
 
-
 }

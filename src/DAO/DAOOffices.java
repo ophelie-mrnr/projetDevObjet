@@ -9,7 +9,6 @@ public class DAOOffices extends DAO<Offices> {
 
 	public DAOOffices(Connection conn) {
 		super(conn);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean create(Offices obj) {
@@ -30,7 +29,6 @@ public class DAOOffices extends DAO<Offices> {
 		return true;
 	}
 
-	@Override
 	public boolean delete(Offices obj) {
 		try{
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -41,10 +39,9 @@ public class DAOOffices extends DAO<Offices> {
 		catch (SQLException e) {
             e.printStackTrace();
             return false;
-	}
+		}
 	}
 
-	@Override
 	public boolean update(Offices obj) {
 		try {
             this .connect	
@@ -68,13 +65,10 @@ public class DAOOffices extends DAO<Offices> {
     }
 }	
 
-	@Override
 	public Offices find(int id) {
 		return null;
-
 	}
 
-	@Override
 	public Offices read(String id) {
 		Offices offices = new Offices();
 
