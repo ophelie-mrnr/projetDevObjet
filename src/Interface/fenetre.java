@@ -58,7 +58,7 @@ public class fenetre extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
-        LOGGER.log(Level.INFO, "test de log");
+        LOGGER.log(Level.INFO, "Ouverture de la page principale");
         
         gestion = new GestionsProduits();
     	visualisationVentes = new VisualisationDesVentes();
@@ -115,6 +115,7 @@ public class fenetre extends javax.swing.JFrame {
     }
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {
+    	LOGGER.log(Level.INFO, "Ouverture du premier onglet sur la gestion des produits");
     	gestion.setVisible(true);
     	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
     	this.setContentPane(gestion);
@@ -122,6 +123,7 @@ public class fenetre extends javax.swing.JFrame {
     }
     
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {
+    	LOGGER.log(Level.INFO, "Ouverture du deuxieme onglet sur la visualisation des ventes");
         visualisationVentes.setVisible(true);
     	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
         this.setContentPane(visualisationVentes);
@@ -129,6 +131,7 @@ public class fenetre extends javax.swing.JFrame {
     }
     
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {
+    	LOGGER.log(Level.INFO, "Ouverture du troisieme onglet sur la visualisation libre");
         visualisationLibre.setVisible(true);
     	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
         this.setContentPane(visualisationLibre);

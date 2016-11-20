@@ -8,7 +8,10 @@ package Interface;
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 import javax.swing.JPanel;
+
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.time.TimeSeries;
 
@@ -16,6 +19,8 @@ import DAO.MaConnexion;
 
 
 public class VisualisationLibre extends javax.swing.JPanel {
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	 // Variables declaration
     private javax.swing.JButton enregistrer;

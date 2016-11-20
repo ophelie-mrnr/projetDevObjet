@@ -22,28 +22,28 @@ public class CreationBDD {
 			//STEP 1: Register JDBC driver
 			Class. forName( "com.mysql.jdbc.Driver" );
 			//STEP 2: Open a connection
-			System. out.println( "Connecting to database..." );
+			System. out.println("Connexion à la base de données en cours");
+			System. out.println(" ");
 			conn = DriverManager. getConnection( DB_URL, USER, PASS);
-			System.out.println("connexion etablie ");
+			System.out.println("Le connexion est etablie ");
 			//STEP 3: Execute a query
-			System. out.println( "Creating database..." );
+			System. out.println("Creation de la base de données en cours");
+			System. out.println(" ");
 			stmt = conn.createStatement();
-
 
 			//suppression de la base de donnï¿½e
 			String q = "DROP DATABASE IF EXISTS schemadevobj";
 			stmt.executeUpdate(q);
-			System. out.println( "BD supprimee ! " );
-
+			System. out.println("La base de donnees est bien supprimee !");
 
 
 			String sq = "CREATE DATABASE schemadevobj" ;
 			stmt.executeUpdate(sq);
-			System. out.println( "Database created successfully..." );
+			System. out.println( "La base de donnees est bien cree !" );
 
 			String DB_URL1 = "jdbc:mysql://localhost/schemadevobj" ;
 
-			System.out.println("Creation des tables ");
+			System.out.println("Creation des tables");
 			Connection conn1 = DriverManager. getConnection( DB_URL1, USER, PASS);
 			stmt1 = conn1.createStatement();
 

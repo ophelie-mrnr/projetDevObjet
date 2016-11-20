@@ -18,20 +18,20 @@ public class MyFormatter extends Formatter{
      
 		String formattedDate = formatter.format(date);
      
-		s.append(formattedDate+"-->"+record.getLevel()+"["+formatMessage(record)+"]\n");
+		s.append(formattedDate+" --> "+record.getLevel()+"["+formatMessage(record)+"]\n");
 		return s.toString();
 	}
 
 	// entête du fichier de log
 	public String getHead(Handler h) {     
 		String formattedDate = formatter.format(new Date());
-		return formattedDate+"-->"+"Ouverture du fichier de log\n";
+		return formattedDate+" --> "+"Ouverture du fichier de log\n";
 	}	
 
 	// fin du fichier de log
 	public String getTail(Handler h) {
 		String formattedDate = formatter.format(new Date());
-		return formattedDate+"-->"+"Fermeture du fichier de log\n";
+		return formattedDate+" --> "+"Fermeture du fichier de log\n";
 	}
 	
 }
