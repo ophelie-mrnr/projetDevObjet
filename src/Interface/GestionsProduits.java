@@ -5,6 +5,7 @@
  */
 package Interface;
 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -169,22 +170,17 @@ public class GestionsProduits extends javax.swing.JPanel {
 
         jLabel12.setText("Description :");
 
-        fournisseurRes.setText("");
-
         jLabel1.setText("Code du produit");
-
-        PriceRes.setText("");
+        
+		PriceRes.setPreferredSize( new Dimension( 100, 24 ) );
+        QuantityInStockRes.setPreferredSize( new Dimension( 100, 24 ) );
+        productNameResultat.setPreferredSize( new Dimension( 200, 24 ) );
 
         jLabel3.setText("Quantit� en stock :");
 
         jLabel5.setText("ProductLines.TextDescription :");
 
         jLabel2.setText("Nom du produit");
-
-
-        ProductLinesDesRes.setText("");
-
-        MSRPREs.setText("fournisseurRes");
 
         jLabel10.setText("MSRP :");
 
@@ -297,7 +293,8 @@ public class GestionsProduits extends javax.swing.JPanel {
         jLayeredPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
+        
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(

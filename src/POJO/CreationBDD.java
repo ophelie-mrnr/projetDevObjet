@@ -18,6 +18,8 @@ public class CreationBDD {
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;
 	public static final String USER = "root" ;
 	public static final String PASS = "" ;
+	
+	public static Statement stmt1 = null;
 
 	public CreationBDD(){
 
@@ -53,7 +55,7 @@ public class CreationBDD {
 
 			System.out.println("Creation des tables ");
 			Connection conn1 = DriverManager. getConnection( DB_URL1, USER, PASS);
-			Statement stmt1 = conn1.createStatement();
+			stmt1 = conn1.createStatement();
 
 			String sqlDeactivateCheck = "/*!40014 SET@OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS,FOREIGN_KEY_CHECKS=0 */;" ;
 
