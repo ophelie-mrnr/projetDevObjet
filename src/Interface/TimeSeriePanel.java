@@ -233,8 +233,8 @@ public class TimeSeriePanel{
 	public static JFreeChart createTimeChart(TimeSeriesCollection dataset, String title){
 		JFreeChart chart = ChartFactory.createTimeSeriesChart(
 				title,
-				"Date",
-				"Sales",
+				"Dates",
+				"Ventes",
 				dataset);
 
 		return chart;

@@ -75,12 +75,12 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
 		validerButton = new javax.swing.JButton();
 		jPanelGraphe = new javax.swing.JPanel();
 
-		tsp = new TimeSeriePanel("Sales :");
+		tsp = new TimeSeriePanel("VENTES :");
 		chartPanel = tsp.cp;
 
 		jLabel1.setText("Pays");
 
-		jLabel2.setText("Date de d�but");
+		jLabel2.setText("Date de debut");
 
 		jLabel3.setText("Date de fin");
 
@@ -179,7 +179,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel {
 		String pays = jComboBox1.getSelectedItem().toString();
 		
 		// remplissage du graphique
-		tsp.addNewSeries("sales", dateDeb, dateFin, pays);
+		tsp.addNewSeries("ventes", dateDeb, dateFin, pays);
 	}
 }
 
