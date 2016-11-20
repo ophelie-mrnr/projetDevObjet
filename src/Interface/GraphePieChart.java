@@ -44,7 +44,7 @@ public ChartPanel getCp() {
      */
     private static PieDataset createDataset() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("One", new Double(43.2));
+        dataset.setValue("One", new Integer(2));
         dataset.setValue("Two", new Double(10.0));
         dataset.setValue("Three", new Double(27.5));
         dataset.setValue("Four", new Double(17.5));
