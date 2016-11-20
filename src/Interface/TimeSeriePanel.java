@@ -126,7 +126,7 @@ public class TimeSeriePanel{
 				}
 
 				timeSeries.addOrUpdate(new Day(jourDeb,moisDeb,anneeDeb), revenu);
-				// incrémentation de la date
+				// incrementation de la date
 				dateDeb = suivant(jourDeb,moisDeb,anneeDeb);
 				jourDeb = jourToInt(dateDeb);
 				moisDeb = moisToInt(dateDeb);
@@ -209,7 +209,7 @@ public class TimeSeriePanel{
 					}
 
 					timeSeries.addOrUpdate(new Day(jourDeb,moisDeb,anneeDeb), revenu);
-					// incrémentation de la date
+					// incrementation de la date
 					dateDeb = suivant(jourDeb,moisDeb,anneeDeb);
 					jourDeb = jourToInt(dateDeb);
 					moisDeb = moisToInt(dateDeb);
@@ -287,7 +287,7 @@ public class TimeSeriePanel{
 		return a;
 	}
 
-	// Permet de mettre les date en string sous forme jj/mm/aaaa (case respectée)
+	// Permet de mettre les date en string sous forme jj/mm/aaaa (case respectee)
 	public static String dateToString(int j, int m, int a){
 		String jour;
 		String mois;
@@ -309,7 +309,7 @@ public class TimeSeriePanel{
 		return s;
 	}
 
-	// Fonction qui permet de savoir si une année est bissextile
+	// Fonction qui permet de savoir si une annee est bissextile
 	public  static boolean bissextile(int a){ 
 		if((a%4==0 && a%100!=0)||(a%400 == 0)){
 			return true;
@@ -318,7 +318,7 @@ public class TimeSeriePanel{
 		}
 	}
 
-	// Permet d'incrémenter la date
+	// Permet d'incrementer la date
 	public static String suivant(int j, int m, int a){
 		// incrementation de la date 
 		if ((j<28) || (j==28 && m!=2) || ((j==28 && m==2) && (bissextile(a) == true))){

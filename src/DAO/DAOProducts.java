@@ -69,9 +69,9 @@ public class DAOProducts extends DAO<Products> {
                 			+ ", productDescription = '"+obj.getProductDescription()+"'"
                 			+ ", quantityInStock = '"+obj.getQuantityInStock()+"'"
                 			+ ", buyPrice = '"+obj.getBuyPrice()+"'"
-                			+ ", MSRP = "+obj.getMSRP()			// problËme : il y avait une ' en trop alors que c'est un double
+                			+ ", MSRP = "+obj.getMSRP()			// probleme : il y avait une ' en trop alors que c'est un double
                 			+" WHERE productCode = '"+obj.getProductCode()+"'"
-
+                			
                  );
 		obj = this.read(obj.getProductLine());
 		return true;

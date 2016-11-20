@@ -29,7 +29,7 @@ import POJO.CreationBDD;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VisualisationDesVentes extends javax.swing.JPanel {
+public class VisualisationDesVentes extends javax.swing.JPanel{
 
 	// Variables declaration                     
 	private javax.swing.JTextField DateDebutTextField;

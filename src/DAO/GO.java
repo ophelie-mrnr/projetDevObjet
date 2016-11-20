@@ -13,6 +13,8 @@ public class GO {
 		
 		new CreationBDD();
 	    DAOCustomers dao_customer = new DAOCustomers(MaConnexion.getInstance());
+	    
+	    /* TESTS
 		int iddumec;
 		iddumec = dao_customer.find(167).getCustomerNumber();
 		System.out.println("L'id est :"+ iddumec);
@@ -22,7 +24,7 @@ public class GO {
 		System.out.println("product name : "+productName);
 		String BuyPrice = ""+dao_products.read("S10_1949").getBuyPrice();
 		System.out.println("prix : "+BuyPrice);
-		
+		*/
 		
 		java.sql.Statement state;
 		try {
