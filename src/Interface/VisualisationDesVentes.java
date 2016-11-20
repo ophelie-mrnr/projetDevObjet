@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -18,16 +21,19 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.ui.ExtensionFileFilter;
 
 import DAO.*;
 import POJO.CreationBDD;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 public class VisualisationDesVentes extends javax.swing.JPanel{
 
@@ -69,7 +75,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		jComboBox1 = new javax.swing.JComboBox();
 		jPanel1 = new javax.swing.JPanel();
 		validerButton = new javax.swing.JButton();
-		
+
 
 		tsp = new TimeSeriePanel("VENTES :");
 		chartPanel = tsp.cp;
@@ -102,7 +108,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		this.add(BorderLayout.NORTH, nord);
 		JButton enregistrer = new JButton("Enregistrer");
 		JButton annuler = new JButton("Annuler");
-		
+
 		jPanel1.add(BorderLayout.CENTER,chartPanel);
 		chartPanel.setVisible(true);
 
@@ -110,72 +116,90 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		this.add(BorderLayout.SOUTH, enregistrer);
 		this.add(BorderLayout.SOUTH, annuler);
 
+		enregistrer.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				enregistrerActionPerformed(evt);
+			}
+		});
+
 		validerButton.setText("Valider");
 		validerButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				ValiderActionPerformed(evt);
+				validerActionPerformed(evt);
 			}
 		});
-		
+
 		annuler.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				AnnulerActionPerformed(evt);
+				annulerActionPerformed(evt);
 			}
 		});
 	}// </editor-fold>                       
 
-	private void ValiderActionPerformed(java.awt.event.ActionEvent evt) {                                        
+	private void validerActionPerformed(java.awt.event.ActionEvent evt) {                                        
 		// TODO add your handling code here:
 		donneesChartPanel();
 		chartPanel.setVisible(true);
 
 	} 
 
-	private void AnnulerActionPerformed(java.awt.event.ActionEvent evt) {                                        
+	private void annulerActionPerformed(java.awt.event.ActionEvent evt) {                                        
 		// TODO add your handling code here:
 		tsp.clean();
 		chartPanel.setVisible(true);
 
 	} 
 
-	public String[] creationComboBox(){
-
-		java.sql.Statement state;
-
-		try {
-			// Liste des product Code
-			state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			String query = "SELECT DISTINCT country FROM customers;";
-			ResultSet res =state.executeQuery(query);	
-
-			ArrayList<String> liste = new ArrayList<String>(); 
-
-
-			while (res.next()){
-				String resultat = res.getString("country");
-				liste.add(resultat);
-			}	
-			tab = new String[liste.size()+1];
-			tab[0]= "All";
-			for(int i = 0; i < liste.size(); i++){
-				tab[i+1] = liste.get(i);
-			}
+	    
+	private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {                                        
+	  			try {
+	  				// doSaveAs ouvre d'elle même un jFileChooser
+					chartPanel.doSaveAs();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	      }
 
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+public String[] creationComboBox(){
+
+	java.sql.Statement state;
+
+	try {
+		// Liste des product Code
+		state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		String query = "SELECT DISTINCT country FROM customers;";
+		ResultSet res =state.executeQuery(query);	
+
+		ArrayList<String> liste = new ArrayList<String>(); 
+
+
+		while (res.next()){
+			String resultat = res.getString("country");
+			liste.add(resultat);
+		}	
+		tab = new String[liste.size()+1];
+		tab[0]= "All";
+		for(int i = 0; i < liste.size(); i++){
+			tab[i+1] = liste.get(i);
 		}
-		return tab;
+
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
-	
-	public void donneesChartPanel(){
-		String dateDeb =  DateDebutTextField.getText().trim();
-		String dateFin = DateFinTextField.getText().trim();
-		String pays = jComboBox1.getSelectedItem().toString();
-		
-		// remplissage du graphique
-		tsp.addNewSeries("ventes", dateDeb, dateFin, pays);
-	}
+	return tab;
+}
+
+public void donneesChartPanel(){
+	String dateDeb =  DateDebutTextField.getText().trim();
+	String dateFin = DateFinTextField.getText().trim();
+	String pays = jComboBox1.getSelectedItem().toString();
+
+	// remplissage du graphique
+	tsp.addNewSeries("ventes", dateDeb, dateFin, pays);
+}
 }
 
