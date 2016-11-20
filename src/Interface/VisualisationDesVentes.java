@@ -41,16 +41,12 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JPanel jPanel1;
 
-	private TimeSeriePanel tsp; 
-
-	private ChartPanel chartPanel;
-
-
 	private String[] tab;
 
 	// variables pour le graphe
-	private javax.swing.JPanel jPanelGraphe;
 	private TimeSeries timeSeries;
+	private TimeSeriePanel tsp; 
+	private ChartPanel chartPanel;
 
 	// End of variables declaration  
 
@@ -73,7 +69,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		jComboBox1 = new javax.swing.JComboBox();
 		jPanel1 = new javax.swing.JPanel();
 		validerButton = new javax.swing.JButton();
-		jPanelGraphe = new javax.swing.JPanel();
+		
 
 		tsp = new TimeSeriePanel("VENTES :");
 		chartPanel = tsp.cp;
