@@ -375,6 +375,8 @@ public class GestionsProduits extends javax.swing.JPanel {
 
     private void enregistrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	// enregistrerButton = Enregistrer
+    	
+    	LOGGER.log(Level.INFO, "Le bouton Enregistrer fait son action");
 
     	DAOProducts d_p = new DAOProducts(MaConnexion.getInstance());
     	Products prod = new Products();
@@ -414,7 +416,8 @@ public class GestionsProduits extends javax.swing.JPanel {
     }                                        
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    	// enregistrerButton = Annuler
+    	// annulerButton = Annuler
+    	LOGGER.log(Level.INFO, "Le bouton Annuler fait son action");
     	afficherProduit();
     }                                        
 
