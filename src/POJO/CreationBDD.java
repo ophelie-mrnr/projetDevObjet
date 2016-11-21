@@ -2,8 +2,12 @@ package POJO;
 
 import java.io.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CreationBDD {
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 	
 	public static final String DB_URL = "jdbc:mysql://localhost/" ;
 
@@ -181,20 +185,26 @@ public class CreationBDD {
 
 		} catch (SQLException se){
 			//Handle errors for JDBC
+			LOGGER.log(Level.SEVERE, "Exception occur", se);
 			se.printStackTrace();
 		} catch (Exception e){
 			//Handle errors for Class.forName
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		} finally {
 			//finally block used to close resources
 			try {
 				if (stmt!= null )
 					stmt.close();
-			} catch (SQLException se2){ } // nothing we can do
+			} catch (SQLException se2){ 
+				LOGGER.log(Level.SEVERE, "Exception occur", se2);
+
+			} // nothing we can do
 			try {
 				if (conn!= null )
 					conn.close();
 			} catch (SQLException se){
+				LOGGER.log(Level.SEVERE, "Exception occur", se);
 				se.printStackTrace();
 			} //end finally try
 		} //end try
