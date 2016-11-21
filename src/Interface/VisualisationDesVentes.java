@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.time.TimeSeries;
 
@@ -15,6 +19,8 @@ import DAO.*;
 
 
 public class VisualisationDesVentes extends javax.swing.JPanel{
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	// Variables declaration                     
 	private javax.swing.JTextField DateDebutTextField;
@@ -124,7 +130,8 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		chartPanel.setVisible(true);
 	} 
 	    
-	private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {                                        
+	private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {  
+		LOGGER.log(Level.INFO, "Clique sur le bouton enregistrer");
 	  		try {
 	  			// doSaveAs ouvre d'elle même un jFileChooser
 				chartPanel.doSaveAs();
