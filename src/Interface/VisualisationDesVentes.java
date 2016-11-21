@@ -102,6 +102,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 
 		enregistrer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				LOGGER.log(Level.INFO, "Clique sur le bouton Enregistrer de la page Visualisation des ventes");
 				enregistrerActionPerformed(evt);
 			}
 		});
@@ -109,31 +110,35 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 		validerButton.setText("Valider");
 		validerButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				LOGGER.log(Level.INFO, "Clique sur le bouton Valider de la page Visualisation des ventes");
 				validerActionPerformed(evt);
 			}
 		});
 
 		annuler.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				LOGGER.log(Level.INFO, "Clique sur le bouton Annuler de la page Visualisation des ventes");
 				annulerActionPerformed(evt);
 			}
 		});
 	}                      
 
-	private void validerActionPerformed(java.awt.event.ActionEvent evt) {                                        
+	private void validerActionPerformed(java.awt.event.ActionEvent evt) { 
+		LOGGER.log(Level.INFO, "Le bouton Valider de la page Visualisation des ventes fait son action");
 		donneesChartPanel();
 		chartPanel.setVisible(true);
 	} 
 
-	private void annulerActionPerformed(java.awt.event.ActionEvent evt) {                                        
+	private void annulerActionPerformed(java.awt.event.ActionEvent evt) { 
+		LOGGER.log(Level.INFO, "Le bouton Annuler de la page Visualisation des ventes fait son action");
 		tsp.clean();
 		chartPanel.setVisible(true);
 	} 
 	    
 	private void enregistrerActionPerformed(java.awt.event.ActionEvent evt) {  
-		LOGGER.log(Level.INFO, "Clique sur le bouton enregistrer");
+		LOGGER.log(Level.INFO, "Le bouton Enregistrer de la page Visualisation des ventes fait son action");
 	  		try {
-	  			// doSaveAs ouvre d'elle même un jFileChooser
+	  			// doSaveAs ouvre d'elle meme un jFileChooser
 				chartPanel.doSaveAs();
 			} catch (IOException e) {
 				e.printStackTrace();

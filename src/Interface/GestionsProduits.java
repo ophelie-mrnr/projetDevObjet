@@ -127,7 +127,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         montrerButton.setText("Montrer");
         montrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	LOGGER.log(Level.INFO, "Clique sur le bouton Montrer");
+            	LOGGER.log(Level.INFO, "Clique sur le bouton Montrer de la page Gestion produits");
             	montrerButtonActionPerformed(evt);
             }
         });
@@ -140,7 +140,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         annulerButton.setText("Annuler");
         annulerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	LOGGER.log(Level.INFO, "Clique sur le bouton Annuler");
+            	LOGGER.log(Level.INFO, "Clique sur le bouton Annuler de la page Gestion produits");
                 annulerButtonActionPerformed(evt);
             }
         });
@@ -148,7 +148,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         enregistrerButton.setText("Enregistrer");
         enregistrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	LOGGER.log(Level.INFO, "Clique sur le bouton Enregistrer");
+            	LOGGER.log(Level.INFO, "Clique sur le bouton Enregistrer de la page Gestion produits");
                 enregistrerButtonActionPerformed(evt);
             }
         });
@@ -369,14 +369,14 @@ public class GestionsProduits extends javax.swing.JPanel {
     }                        
 
     private void montrerButtonActionPerformed(java.awt.event.ActionEvent evt) {   
-    	LOGGER.log(Level.INFO, "Le bouton montrer devient visible");
+    	LOGGER.log(Level.INFO, "Le bouton montrer de la page Gestion produits devient visible");
     	jLayeredPane1.setVisible(true);
     }                                        
 
     private void enregistrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	// enregistrerButton = Enregistrer
     	
-    	LOGGER.log(Level.INFO, "Le bouton Enregistrer fait son action");
+    	LOGGER.log(Level.INFO, "Le bouton Enregistrer de la page Gestion produits fait son action");
 
     	DAOProducts d_p = new DAOProducts(MaConnexion.getInstance());
     	Products prod = new Products();
@@ -417,7 +417,7 @@ public class GestionsProduits extends javax.swing.JPanel {
 
     private void annulerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	// annulerButton = Annuler
-    	LOGGER.log(Level.INFO, "Le bouton Annuler fait son action");
+    	LOGGER.log(Level.INFO, "Le bouton Annuler de la page Gestion produits fait son action");
     	afficherProduit();
     }                                        
 
