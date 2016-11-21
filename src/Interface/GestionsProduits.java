@@ -11,7 +11,9 @@ import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 
 import DAO.DAOProducts;
@@ -101,7 +103,8 @@ public class GestionsProduits extends javax.swing.JPanel {
         
         
         	jTable1.addMouseListener(new MouseAdapter(){
-        		public void mouseClicked(MouseEvent me) {       		
+        		public void mouseClicked(MouseEvent me) { 
+        			LOGGER.log(Level.INFO, "Clique sur un objet du tableau");
         			afficherProduit();
         		}
         	}   
@@ -124,6 +127,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         montrerButton.setText("Montrer");
         montrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	LOGGER.log(Level.INFO, "Clique sur le bouton Montrer");
             	montrerButtonActionPerformed(evt);
             }
         });
@@ -136,6 +140,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         annulerButton.setText("Annuler");
         annulerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	LOGGER.log(Level.INFO, "Clique sur le bouton Annuler");
                 annulerButtonActionPerformed(evt);
             }
         });
@@ -143,6 +148,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         enregistrerButton.setText("Enregistrer");
         enregistrerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	LOGGER.log(Level.INFO, "Clique sur le bouton Enregistrer");
                 enregistrerButtonActionPerformed(evt);
             }
         });
@@ -362,7 +368,8 @@ public class GestionsProduits extends javax.swing.JPanel {
         );
     }                        
 
-    private void montrerButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void montrerButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+    	LOGGER.log(Level.INFO, "Le bouton montrer devient visible");
     	jLayeredPane1.setVisible(true);
     }                                        
 
@@ -399,7 +406,7 @@ public class GestionsProduits extends javax.swing.JPanel {
     	jTable1.setVisible(false);    	
     	 jTable1.setModel(new javax.swing.table.DefaultTableModel(
     	            creationJtable(),new String [] {
-    	                "Code du produit", "Nom du produit", "Quantit� en stock", "Prix d'achat"
+    	                "Code du produit", "Nom du produit", "Quantite en stock", "Prix d'achat"
     	            }
     	        ));
     	 jTable1.setVisible(true);
@@ -417,7 +424,7 @@ public class GestionsProduits extends javax.swing.JPanel {
     	
  	// on affiche le bouton "Montrer" quand nous selectionnons une ligne dans la Jtable
  		montrerButton.setVisible(true);
- 	// On instancie nos differentes variables utilisé pour le produit
+ 	// On instancie nos differentes variables utilisees pour le produit
  	String id;
  	String productLine;
  	ImageIcon photo;
@@ -459,6 +466,7 @@ public class GestionsProduits extends javax.swing.JPanel {
     }
     
     public String[][] creationJtable(){
+    	
     	
         java.sql.Statement state;
         
@@ -508,6 +516,7 @@ public class GestionsProduits extends javax.swing.JPanel {
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
+    	
 		return tabstring;
     }               
 }
