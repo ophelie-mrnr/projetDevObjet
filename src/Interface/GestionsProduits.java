@@ -112,7 +112,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         	
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             creationJtable(),
-            new String [] {"Code du produit", "Nom du produit", "Quantit� en stock", "Prix d'achat"}
+            new String [] {"Code du produit", "Nom du produit", "Quantité(s) en stock", "Prix d'achat"}
         ) {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -202,7 +202,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         QuantityInStockRes.setPreferredSize( new Dimension( 100, 24 ) );
         productNameResultat.setPreferredSize( new Dimension( 200, 24 ) );
 
-        jLabel3.setText("Quantit� en stock :");
+        jLabel3.setText("Quantité(s) en stock :");
 
         jLabel5.setText("ProductLines.TextDescription :");
 
@@ -464,6 +464,7 @@ public class GestionsProduits extends javax.swing.JPanel {
  	MSRPREs.setText(""+MSRP);
  	QuantityInStockRes.setText(""+quantityInStock);
  	DescriptionRes.setText(productDescription);
+ 	DescriptionRes.setLineWrap(true); 
  	jLabel14.setIcon(photo);
 
     }

@@ -5,11 +5,17 @@
  */
 package Interface;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 import DAO.GO;
 import GestionLog.MyFormatter;
@@ -19,15 +25,16 @@ public class fenetre extends javax.swing.JFrame {
 	private static final Logger LOGGER = Logger.getLogger("myLogger");
 	
     // Variables declaration
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel gestion;
-    private javax.swing.JPanel visualisationVentes;
+    private JMenu gestionProduitsMenu;
+    private JMenu visualisationVenteMenu;
+    private JMenu visualisationLibreMenu;
+    private JMenuBar barreMenu;
+    private JPanel gestion;
+    private JPanel visualisationVentes;
 
-	private javax.swing.JPanel visualisationLibre;
+	private JPanel visualisationLibre;
 
+	
     // End of variables declaration
 	
     /**
@@ -53,10 +60,11 @@ public class fenetre extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
     	
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        barreMenu = new JMenuBar();
+        gestionProduitsMenu = new JMenu();
+        visualisationVenteMenu = new JMenu();
+        visualisationLibreMenu = new JMenu();
+       
 
         LOGGER.log(Level.INFO, "Ouverture de la page principale");
         
@@ -68,33 +76,33 @@ public class fenetre extends javax.swing.JFrame {
     	this.add(visualisationVentes);
     	this.add(visualisationLibre);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(barreMenu);
            
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Gestion des produits");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        gestionProduitsMenu.setText("Gestion des produits");
+        gestionProduitsMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                gestionProduitsMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        barreMenu.add(gestionProduitsMenu);
 
-        jMenu2.setText("Visualisations des ventes");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        visualisationVenteMenu.setText("Visualisations des ventes");
+        visualisationVenteMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                visualisationVenteMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        barreMenu.add(visualisationVenteMenu);
 
-        jMenu3.setText("Visualisations libres");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        visualisationLibreMenu.setText("Visualisations libres");
+        visualisationLibreMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
+                visualisationLibreMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        barreMenu.add(visualisationLibreMenu);
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,7 +122,7 @@ public class fenetre extends javax.swing.JFrame {
         pack();
     }
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {
+    private void gestionProduitsMenuMouseClicked(java.awt.event.MouseEvent evt) {
     	LOGGER.log(Level.INFO, "Ouverture de la page gestion des produits");
     	gestion.setVisible(true);
     	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
@@ -122,7 +130,7 @@ public class fenetre extends javax.swing.JFrame {
     	this.revalidate();
     }
     
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {
+    private void visualisationVenteMenuMouseClicked(java.awt.event.MouseEvent evt) {
     	LOGGER.log(Level.INFO, "Ouverture de la page visualisation des ventes");
         visualisationVentes.setVisible(true);
     	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
@@ -130,7 +138,7 @@ public class fenetre extends javax.swing.JFrame {
     	this.revalidate();
     }
     
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {
+    private void visualisationLibreMenuMouseClicked(java.awt.event.MouseEvent evt) {
     	LOGGER.log(Level.INFO, "Ouverture de la page visualisation libre");
         visualisationLibre.setVisible(true);
     	javax.swing.MenuSelectionManager.defaultManager().clearSelectedPath();
