@@ -76,7 +76,7 @@ public class GraphePieChart  {
     private static JFreeChart createChart(PieDataset dataset) {
 
         JFreeChart chart = ChartFactory.createPieChart(
-            "Pie Chart Demo 1",  // chart title
+            "Resultat de la requete en graphe ",  // chart title
             dataset,             // data
             true,               // include legend
             true,

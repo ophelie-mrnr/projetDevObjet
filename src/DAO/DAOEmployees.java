@@ -17,23 +17,9 @@ public class DAOEmployees extends DAO<Employees> {
 	}
 	public boolean create(Employees obj) {
 		
-		PreparedStatement stmt = null;
-		
 		try{
 			LOGGER.log(Level.INFO, "Requete INSERT");
-			
-			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Employees VALUES (?, ?, ?, ?, ?, ?, ?)");
-			stmt.setLong(1, obj.getEmployeeNumber());
-			stmt.setString(2, obj.getLastName());
-			stmt.setString(3, obj.getFirstName());
-			stmt.setString(4, obj.getEmail());
-			stmt.setString(5, obj.getOfficeCode());
-			stmt.setLong(6, obj.getReportsTo());
-			stmt.setString(7, obj.getJobTitle());			
-			
-			stmt.execute();
-			/*
+								
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Employees "
    					+ "VALUES (obj.getEmployeeNumber(),"
@@ -43,7 +29,7 @@ public class DAOEmployees extends DAO<Employees> {
    					+ "obj.getOfficeCode(),"
    					+ "obj.getReportsTo(),"
    					+ "obj.getJobTitle()");
-   			*/
+   			
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
@@ -53,22 +39,14 @@ public class DAOEmployees extends DAO<Employees> {
 	}
 
 	public boolean delete(Employees obj) {
-
-		PreparedStatement pstmt = null;
 		
 		try{
-			LOGGER.log(Level.INFO, "Requete DELETE");
-			
-			pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("DELETE FROM employees WHERE employeeNumber = ?");		               	
-					
-			 pstmt.setLong( 1, obj.getEmployeeNumber()); 
-			 pstmt.execute();
-			 /*
+			LOGGER.log(Level.INFO, "Requete DELETE");			
+			 
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM employees WHERE employeeNumber ="
 							+ obj.getEmployeeNumber());
-			*/
+			
 			return true;
 		}
 		catch (SQLException e) {
@@ -79,27 +57,10 @@ public class DAOEmployees extends DAO<Employees> {
 	}
 
 	public boolean update(Employees obj) {
-
-		PreparedStatement pstmt = null;
 		
 		try{
 			LOGGER.log(Level.INFO, "Requete UPDATE");
-			
-			/*pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE employees SET customerName = ?");		               	
-					
-			pstmt.setLong(1, obj.getCustomerNumber());
-			pstmt.setString(2, obj.getCustomerName());
-			pstmt.setString(3, obj.getContactLastName());
-			pstmt.setString(4, obj.getContactFirstName());
-			pstmt.setString(5, obj.getPhone());
-			pstmt.setString(6, obj.getCity());
-			pstmt.setString(7, obj.getState());
-			pstmt.setString(8, obj.getPostalCode());
-			pstmt.setString(9, obj.getCountry());
-			pstmt.setLong(10, obj.getSalesRepEmployeeNumber());	
-			 
-			 pstmt.execute();*/
+						
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -155,7 +116,4 @@ public class DAOEmployees extends DAO<Employees> {
 		return null;
 	}
 }
-
-
-
 

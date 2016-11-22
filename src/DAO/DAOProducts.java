@@ -1,6 +1,11 @@
 package DAO;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -24,29 +29,13 @@ public class DAOProducts extends DAO<Products> {
 	public DAOProducts(Connection conn) {
 		super(conn);
 	}
-
+	
+	
 	public boolean create(Products obj) {
-
-		PreparedStatement stmt = null;
 		
 		try{
 			
-			LOGGER.log(Level.INFO, "Requete INSERT");
-			
-			/*stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			stmt.setString(1, obj.getProductCode());
-			stmt.setString(2, obj.getProductName());
-			stmt.setString(3, obj.getProductLine());
-			stmt.setImageIcon(4, obj.getPhoto());
-			stmt.setString(5, obj.getProductVendor());	
-			stmt.setString(6, obj.getProductDescription());	
-			stmt.setLong(7, obj.getQuantityInStock());	
-			stmt.setLong(8, (long) obj.getBuyPrice());
-			stmt.setLong(9, (long) obj.getMSRP());
-			
-			stmt.execute();*/
-					
+			LOGGER.log(Level.INFO, "Requete INSERT");		
 			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Products "
@@ -58,8 +47,8 @@ public class DAOProducts extends DAO<Products> {
    					+ "obj.getProductDescription()"
    					+ "obj.getQuantityInStock()"
    					+ "obj.getBuyPrice()"
-   					+ "obj.getMSRP()");
-			 
+   					+ "obj.getMSRP()");			 
+	
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
@@ -87,9 +76,59 @@ public class DAOProducts extends DAO<Products> {
 
 	public boolean update(Products obj) {
 		
-		try {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		PreparedStatement pstmt5 = null;
+		PreparedStatement pstmt6 = null;
+		PreparedStatement pstmt7 = null;
+		PreparedStatement pstmt8 = null;
+		
+		try{
 			LOGGER.log(Level.INFO, "Requete UPDATE");
 			
+			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ?");		               	
+			 pstmt1.execute();
+			pstmt1.setString(1, obj.getProductName());
+			
+			pstmt2 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerLastName = ?");		               	
+			pstmt2.execute();			
+			pstmt2.setString(1, obj.getProductLine());
+			
+			pstmt3 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerFirstName = ?");		               	
+			pstmt3.execute();
+			pstmt3.setString(1, obj.getProductVendor());
+			
+			pstmt4 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET phone = ?");		               	
+			pstmt4.execute();
+			pstmt4.setString(1, obj.getProductDescription());
+			
+			pstmt5 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET city = ?");		               	
+			pstmt5.execute();
+			pstmt5.setLong(1, obj.getQuantityInStock());
+			
+			pstmt6 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET state = ?");		               	
+			pstmt6.execute();
+			pstmt6.setLong(1, (long) obj.getBuyPrice());
+			
+			pstmt7 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET postalCode = ?");		               	
+			pstmt7.execute();
+			pstmt7.setLong(1, (long) obj.getMSRP());
+			
+			pstmt8 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET country = ?");		               	
+			pstmt8.execute();
+			pstmt8.setString(1, obj.getProductCode());			
+			 
+			/*
             this.connect
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -106,6 +145,7 @@ public class DAOProducts extends DAO<Products> {
                 			+" WHERE productCode = '"+obj.getProductCode()+"'"
                 			
                  );
+                 */
 		obj = this.read(obj.getProductLine());
 		
 		return true;

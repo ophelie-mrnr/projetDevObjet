@@ -18,21 +18,9 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 
 	public boolean create(Orderdetails obj) {
 		
-		PreparedStatement stmt = null;
-		
 		try{
 			LOGGER.log(Level.INFO, "Requete INSERT");
 			
-			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Orderdetails VALUES (?, ?, ?, ?, ?)");
-			stmt.setLong(1, obj.getOrderNumber());
-			stmt.setString(2, obj.getProductCode());
-			stmt.setLong(3, obj.getQuantityOrdered());
-			stmt.setLong(4, (long) obj.getPriceEach());
-			stmt.setLong(5, obj.getOrderLineNumber());		
-			
-			stmt.execute();
-			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Orderdetails "
 						+ "VALUES (obj.getOrderNumber(),"
@@ -40,7 +28,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 						+ "obj.getQuantityOrdered(),"
 						+ "obj.getPriceEach(),"
 						+ "obj.getOrderLineNumber()");
-			 */
+			 
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

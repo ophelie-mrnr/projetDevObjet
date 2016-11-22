@@ -17,28 +17,11 @@ public class DAOCustomers extends DAO<Customers> {
 	}
 
 	public boolean create(Customers obj) {
-		
-		PreparedStatement stmt = null;
+
 		try{
 			
-			LOGGER.log(Level.INFO, "Requete INSERT");
+			LOGGER.log(Level.INFO, "Requete INSERT");			
 			
-			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Customers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			stmt.setLong(1, obj.getCustomerNumber());
-			stmt.setString(2, obj.getCustomerName());
-			stmt.setString(3, obj.getContactLastName());
-			stmt.setString(4, obj.getContactFirstName());
-			stmt.setString(5, obj.getPhone());
-			stmt.setString(6, obj.getCity());
-			stmt.setString(7, obj.getState());
-			stmt.setString(8, obj.getPostalCode());
-			stmt.setString(9, obj.getCountry());
-			stmt.setLong(10, obj.getSalesRepEmployeeNumber());			
-			
-			stmt.execute();
-			
-			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Customers "
 					+ "VALUES (obj.getCustomerNumber(),"
@@ -51,7 +34,7 @@ public class DAOCustomers extends DAO<Customers> {
 					+ "obj.getPostalCode(),"
 					+ "obj.getCountry(),"
 					+ "obj.getSalesRepEmployeeNumber()");
-			 */	
+			 
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
@@ -66,19 +49,10 @@ public class DAOCustomers extends DAO<Customers> {
 		
 		try{
 			
-			LOGGER.log(Level.INFO, "Requete DELETE");
-			
-			pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("DELETE FROM customers WHERE CustomerNumber = ?");		               	
-					
-			 pstmt.setLong( 1, obj.getCustomerNumber()); 
-			 pstmt.execute();
-			
-			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE CustomerNumber ="
 							+ obj.getCustomerNumber());
-			*/
+			
 			return true;
 		}
 		catch (SQLException e) {
@@ -104,49 +78,58 @@ public class DAOCustomers extends DAO<Customers> {
 			LOGGER.log(Level.INFO, "Requete UPDATE");
 			
 			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ?");		               	
-			 pstmt1.execute();
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ? WHERE customerNumber = ?");		               	
+			 pstmt1.executeUpdate();
 			pstmt1.setString(1, obj.getCustomerName());
+			pstmt1.setLong(2, obj.getCustomerNumber());
 			
 			pstmt2 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerLastName = ?");		               	
-			pstmt2.execute();			
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerLastName = ? WHERE customerNumber = ?");		               	
+			pstmt2.executeUpdate();			
 			pstmt2.setString(1, obj.getContactLastName());
+			pstmt2.setLong(2, obj.getCustomerNumber());
 			
 			pstmt3 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerFirstName = ?");		               	
-			pstmt3.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerFirstName = ? WHERE customerNumber = ?");		               	
+			pstmt3.executeUpdate();;
 			pstmt3.setString(1, obj.getContactFirstName());
+			pstmt3.setLong(2, obj.getCustomerNumber());
 			
 			pstmt4 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET phone = ?");		               	
-			pstmt4.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET phone = ? WHERE customerNumber = ?");		               	
+			pstmt4.executeUpdate();
 			pstmt4.setString(1, obj.getPhone());
+			pstmt4.setLong(2, obj.getCustomerNumber());
 			
 			pstmt5 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET city = ?");		               	
-			pstmt5.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET city = ? WHERE customerNumber = ?");		               	
+			pstmt5.executeUpdate();
 			pstmt5.setString(1, obj.getCity());
+			pstmt5.setLong(2, obj.getCustomerNumber());
 			
 			pstmt6 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET state = ?");		               	
-			pstmt6.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET state = ? WHERE customerNumber = ?");		               	
+			pstmt6.executeUpdate();
 			pstmt6.setString(1, obj.getState());
+			pstmt6.setLong(2, obj.getCustomerNumber());
 			
 			pstmt7 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET postalCode = ?");		               	
-			pstmt7.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET postalCode = ? WHERE customerNumber = ?");		               	
+			pstmt7.executeUpdate();
 			pstmt7.setString(1, obj.getPostalCode());
+			pstmt7.setLong(2, obj.getCustomerNumber());
 			
 			pstmt8 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET country = ?");		               	
-			pstmt8.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET country = ? WHERE customerNumber = ?");		               	
+			pstmt8.executeUpdate();
 			pstmt8.setString(1, obj.getCountry());
+			pstmt8.setLong(2, obj.getCustomerNumber());
 			
 			pstmt9 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET salesRepEmployeeNumber = ?");		               	
-			pstmt9.execute();
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET salesRepEmployeeNumber = ? WHERE customerNumber = ?");		               	
+			pstmt9.executeUpdate();
 			pstmt9.setLong(1, obj.getSalesRepEmployeeNumber());	
+			pstmt9.setLong(2, obj.getCustomerNumber());
 			 
 			
 			 

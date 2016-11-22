@@ -6,6 +6,9 @@
 package Interface;
 
 import java.awt.BorderLayout;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -15,9 +18,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
+
+
+
+
+
+
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.time.TimeSeries;
@@ -138,13 +155,28 @@ public class VisualisationLibre extends javax.swing.JPanel {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			// Sinon, on traite le cas de toutes les autres requêtes
 
-			// Et on crée alors le tableau qui récupère les deux tableaux : tableau de données et tableau de titres
+			// Et on créer alors le tableau qui récupère les deux tableaux : tableau de données et tableau de titres
 
+			
+			Object[][] donnees = donneesJtable(requete);
+			Object[] titres = titreJtable(requete);
+		
 			 jTable2.setModel(new javax.swing.table.DefaultTableModel(
-			            donneesJtable(requete),
-			           titreJtable(requete)
-			        ));
+					 donnees, titres
+					 	
+			        ));			 
 
+			 // on parcours cellule par cellule
+			 for(int i = 0; i < donnees.length; i++){
+				   for(int j = 0; j < donnees[i].length; j++){
+					   Object testObject = donnees[i][j];
+					   if (testObject!=null) { // si la cellule n'est pas vide
+						   if (testObject instanceof ImageIcon) { // si la cellule contient une image
+							   jTable2.getColumnModel().getColumn(j).setCellRenderer(new ImageRenderer()); // on indique que le contenu de la cellule est une image
+						   }
+					   }
+				   }
+				}
 			 // Affichage du tableau avec les en tête
 
 			jPanelTableau.add(jTable2.getTableHeader());
@@ -265,12 +297,9 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 			for (int i =1; i<=metadata.getColumnCount(); i++){
 
-
 				if (metadata.getColumnName(i).equals("productCode")){
 					resultatProductCode = resPC.getString("productCode");
 					titre[i-1] = "productCode";
-					System.out.println("test des titres");
-
 				}
 				if (metadata.getColumnName(i).equals("productName")){
 					resultatProductName = resPC.getString("productName");
@@ -280,7 +309,10 @@ public class VisualisationLibre extends javax.swing.JPanel {
 					resultatProductLine = resPC.getString("productLine");
 					titre[i-1] = "productLine";
 				}
-
+				if (metadata.getColumnName(i).equals("photo")){
+					resultatProductLine = resPC.getString("photo");
+					titre[i-1] = "photo";
+				}				
 				if (metadata.getColumnName(i).equals("productVendor")){
 					resultatProductVendor = resPC.getString("productVendor");
 					titre[i-1] = "productVendor";
@@ -310,8 +342,8 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		e.printStackTrace();
 	}
 		return titre;
-	}
-
+	}	
+	
 
 	public static Object[][] donneesJtable(String query){
 
@@ -336,7 +368,20 @@ public class VisualisationLibre extends javax.swing.JPanel {
 					System.out.println("j est égal à" + j);
 					System.out.println("nombre de colonnes " + nbClumn);
 					System.out.println("test de metadata :" + metadata.getColumnName(j));
-					donnees[i][j-1] = resPC.getObject(metadata.getColumnName(j));
+					if (metadata.getColumnName(j).equals("photo")) {
+						System.out.println("toto");
+						if (resPC.getObject(metadata.getColumnName(j))!=null) {
+							System.out.println("titi");
+							Blob blob = resPC.getBlob(j);
+							
+							//Transform Blob into ImageIcon
+							BufferedInputStream is = new BufferedInputStream(blob.getBinaryStream());
+							ImageIcon resultatPhoto = new ImageIcon(ImageIO.read(is));
+							donnees[i][j-1] = resultatPhoto;
+						}
+					} else {
+						donnees[i][j-1] = resPC.getObject(metadata.getColumnName(j));
+					}
 
 				}
 				i++;
@@ -349,7 +394,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 			return donnees;
 
-		} catch (SQLException e) {
+		} catch (SQLException | IOException e) {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
