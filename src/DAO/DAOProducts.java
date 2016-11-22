@@ -31,7 +31,7 @@ public class DAOProducts extends DAO<Products> {
 		
 		try{
 			/*stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?)");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, obj.getProductCode());
 			stmt.setString(2, obj.getProductName());
 			stmt.setString(3, obj.getProductLine());
