@@ -1,5 +1,6 @@
 package Interface;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -52,24 +53,57 @@ public class TimeSeriePanel{
 		ArrayList<String> liste = new ArrayList<String>(); 
 
 		int revenu =0;
+		int jourDeb =0 , moisDeb =0 , anneeDeb=0;
+		int jourFin=0, moisFin=0, anneeFin=0;
 
-		int jourDeb =0 , moisDeb =0 , anneeDeb=0, jourFin=0, moisFin=0, anneeFin=0;
+		// On cherche a mettre les deux dates sous forme : jj-mm-aaaa
+
+		// Si l'utilisateur n'a pas mis de date la date de debut va corresprondre a la premiere date de la bdd 
+		if (dateDeb.equals("aaaa-mm-jj") || dateDeb.equals("")  ){
+			try {
+				state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				String query = "SELECT orderDate FROM orders;";
+				ResultSet res0 =state.executeQuery(query);
+				res0.next();
+				dateDeb = res0.getString(1);
+			}
+			catch (SQLException e) {
+				LOGGER.log(Level.SEVERE, "Exception occur", e);
+				e.printStackTrace();
+			}
+		}
+
 		jourDeb = jourToInt(dateDeb);
 		moisDeb = moisToInt(dateDeb);
 		anneeDeb = anneeToInt(dateDeb);
+		dateDeb = dateToString(jourDeb,moisDeb , anneeDeb);
+
+		// Si l'utilisateur n'a pas mis la date, la date de din correspondra a la date la plus récente
+		if (dateFin.equals("aaaa-mm-jj") || dateFin.equals("")  ){
+			try {
+				state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				String query = "SELECT orderDate FROM orders;";
+				ResultSet res0 =state.executeQuery(query);
+				while (res0.next()){
+				dateFin = res0.getString(1);
+				}
+			}
+			catch (SQLException e) {
+				LOGGER.log(Level.SEVERE, "Exception occur", e);
+				e.printStackTrace();
+			}
+		}
+
 		jourFin = jourToInt(dateFin);
 		moisFin = moisToInt(dateFin);
 		anneeFin = anneeToInt(dateFin);
-
-
-		// On cherche a mettre les deux dates sous forme : jj-mm-aaaa
 		dateFin = dateToString(jourFin, moisFin, anneeFin );
-		dateDeb = dateToString(jourDeb,moisDeb , anneeDeb);
+
 
 		//On incrémente le jour de fin pour aller jusque jour de fin voulu
 		dateFin = suivant(jourToInt(dateFin),moisToInt(dateFin),anneeToInt(dateFin));
 
-		
+
 		// Faire PAYS
 		if (pays=="All"){
 			while(dateDeb.equals(dateFin)==false){
@@ -215,7 +249,7 @@ public class TimeSeriePanel{
 						e1.printStackTrace();
 					}
 					timeSeries.addOrUpdate(new Day(jourDeb,moisDeb,anneeDeb), revenu);
-					
+
 					// incrementation de la date
 					dateDeb = suivant(jourDeb,moisDeb,anneeDeb);
 					jourDeb = jourToInt(dateDeb);
