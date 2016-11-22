@@ -91,6 +91,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 		enregistrer.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				LOGGER.log(Level.INFO, "Clique sur le bouton Enregistrer de la page Visualisation libre");
 				enregistrerButtonActionPerformed(evt);
 			}
 		});
@@ -99,6 +100,8 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 	private void enregistrerButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
+		LOGGER.log(Level.INFO, "Le bouton Enregistrer de la page Visualisation libre fait son action");
+		
 		// Récupération de la requête de la zone de texte
 		String requete = "";
 		requete = texteRequete.getText();
@@ -170,7 +173,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 		}
 		else{
-			System.out.println("REQUETE SQL NON");
+			LOGGER.log(Level.SEVERE, "Syntaxe de la requete SQL non valide");
 			return false;
 		}
 
@@ -231,7 +234,8 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
-			System.out.println("TEST SQL PAS BON LOL ");
+			LOGGER.log(Level.SEVERE, "TEST SQL PAS BON");
+			System.out.println("TEST SQL PAS BON");
 			JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
 		}
 		return resultatListe;

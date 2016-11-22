@@ -141,6 +141,7 @@ public class VisualisationDesVentes extends javax.swing.JPanel{
 	  			// doSaveAs ouvre d'elle meme un jFileChooser
 				chartPanel.doSaveAs();
 			} catch (IOException e) {
+				LOGGER.log(Level.SEVERE, "Exception occur", e);
 				e.printStackTrace();
 			}
 	 }
