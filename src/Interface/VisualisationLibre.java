@@ -20,12 +20,6 @@ import java.util.logging.Logger;
 
 
 
-
-
-
-
-
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -88,6 +82,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		jPanelTableau = new javax.swing.JPanel();
 
 		texteRequete = new javax.swing.JTextArea(5,20);
+		texteRequete.setLineWrap(true); // textArea fixe
 
 		jTable2 = new javax.swing.JTable();
 
@@ -166,6 +161,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 					 	
 			        ));			 
 
+			 
 			 // on parcours cellule par cellule
 			 for(int i = 0; i < donnees.length; i++){
 				   for(int j = 0; j < donnees[i].length; j++){
