@@ -471,6 +471,7 @@ public class GestionsProduits extends javax.swing.JPanel {
     public String[][] creationJtable(){
     	
     	
+
         java.sql.Statement state;
         
     	try {
@@ -480,6 +481,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         ResultSet resPC =state.executeQuery(queryPC);	
         
 		DAOProducts dao_product = new DAOProducts(MaConnexion.getInstance());
+		
 		
         ArrayList<String> listePC = new ArrayList<String>(); 
         ArrayList<String> listePN = new ArrayList<String>(); 
@@ -497,6 +499,9 @@ public class GestionsProduits extends javax.swing.JPanel {
         	listeQ.add(quantity);
         	listeB.add(prix);
         }	
+        
+		
+
         tableauProductCode = new String[listePC.size()];
         tableauProductName = new String[listePC.size()];
         tableauQuantityInStock = new String[listePC.size()];

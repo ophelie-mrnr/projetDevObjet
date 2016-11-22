@@ -27,17 +27,11 @@ public class GO {
 	        while (res.next()){
 	        	String resultat = res.getString("productCode");
 	        	liste.add(resultat);
-	        }	
-	        
-	        for(int i = 0; i < liste.size(); i++){
-	       //     System.out.println("�l�ment � l'index " + i + " = " + liste.get(i));
-	        }
+	        }		        	     
 	        
 		} catch (SQLException e) {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
-
 	}
-
 }

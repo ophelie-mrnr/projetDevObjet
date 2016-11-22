@@ -66,7 +66,7 @@ public class TimeSeriePanel{
 		//On incrémente le jour de fin pour aller jusque jour de fin voulu
 		dateFin = suivant(jourToInt(dateFin),moisToInt(dateFin),anneeToInt(dateFin));
 
-
+		
 		// Faire PAYS
 		if (pays=="All"){
 			while(dateDeb.equals(dateFin)==false){
@@ -78,7 +78,6 @@ public class TimeSeriePanel{
 					ResultSet res =state.executeQuery(query);
 
 					liste = new ArrayList<String>(); 
-
 					while (res.next()){
 						String resultat = res.getString("orderNumber");
 						liste.add(resultat);
