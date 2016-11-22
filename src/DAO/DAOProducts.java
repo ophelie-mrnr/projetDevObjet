@@ -30,6 +30,9 @@ public class DAOProducts extends DAO<Products> {
 		PreparedStatement stmt = null;
 		
 		try{
+			
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			/*stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, obj.getProductCode());
@@ -43,8 +46,7 @@ public class DAOProducts extends DAO<Products> {
 			stmt.setLong(9, (long) obj.getMSRP());
 			
 			stmt.execute();*/
-			
-		
+					
 			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Products "
@@ -67,7 +69,10 @@ public class DAOProducts extends DAO<Products> {
 	}
 
 	public boolean delete(Products obj) {
+		
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE productCode ="
 							+ obj.getProductCode());
@@ -81,9 +86,10 @@ public class DAOProducts extends DAO<Products> {
 	}
 
 	public boolean update(Products obj) {
+		
 		try {
-
-			LOGGER.log(Level.INFO, "BEGIN UPDATE");
+			LOGGER.log(Level.INFO, "Requete UPDATE");
+			
             this.connect
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -101,6 +107,7 @@ public class DAOProducts extends DAO<Products> {
                 			
                  );
 		obj = this.read(obj.getProductLine());
+		
 		return true;
 		} catch (SQLException e) {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

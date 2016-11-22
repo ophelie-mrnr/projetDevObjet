@@ -20,6 +20,9 @@ public class DAOCustomers extends DAO<Customers> {
 		
 		PreparedStatement stmt = null;
 		try{
+			
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Customers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			stmt.setLong(1, obj.getCustomerNumber());
@@ -62,6 +65,9 @@ public class DAOCustomers extends DAO<Customers> {
 		PreparedStatement pstmt = null;
 		
 		try{
+			
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("DELETE FROM customers WHERE CustomerNumber = ?");		               	
 					
@@ -95,6 +101,8 @@ public class DAOCustomers extends DAO<Customers> {
 		PreparedStatement pstmt9 = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete UPDATE");
+			
 			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ?");		               	
 			 pstmt1.execute();
@@ -176,6 +184,7 @@ public class DAOCustomers extends DAO<Customers> {
 		Customers customers = new Customers();
 
 		try{
+			LOGGER.log(Level.INFO, "Requete SELECT");
 		
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,

@@ -20,6 +20,8 @@ public class DAOEmployees extends DAO<Employees> {
 		PreparedStatement stmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Employees VALUES (?, ?, ?, ?, ?, ?, ?)");
 			stmt.setLong(1, obj.getEmployeeNumber());
@@ -55,6 +57,8 @@ public class DAOEmployees extends DAO<Employees> {
 		PreparedStatement pstmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("DELETE FROM employees WHERE employeeNumber = ?");		               	
 					
@@ -79,6 +83,8 @@ public class DAOEmployees extends DAO<Employees> {
 		PreparedStatement pstmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete UPDATE");
+			
 			/*pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE employees SET customerName = ?");		               	
 					
@@ -120,6 +126,8 @@ public class DAOEmployees extends DAO<Employees> {
 		Employees employees = new Employees();
 
 		try{
+			LOGGER.log(Level.INFO, "Requete SELECT");
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Employees where employeeNumber = " + id);
