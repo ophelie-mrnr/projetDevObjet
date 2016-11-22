@@ -44,6 +44,8 @@ public class DAOProducts extends DAO<Products> {
 			
 			stmt.execute();*/
 			
+		
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Products "
    					+ "VALUES (obj.getProductCode(),"

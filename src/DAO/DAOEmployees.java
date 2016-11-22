@@ -51,10 +51,20 @@ public class DAOEmployees extends DAO<Employees> {
 	}
 
 	public boolean delete(Employees obj) {
+
+		PreparedStatement pstmt = null;
+		
 		try{
+			pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("DELETE FROM employees WHERE employeeNumber = ?");		               	
+					
+			 pstmt.setLong( 1, obj.getEmployeeNumber()); 
+			 pstmt.execute();
+			 /*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE employeeNumber ="
+					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM employees WHERE employeeNumber ="
 							+ obj.getEmployeeNumber());
+			*/
 			return true;
 		}
 		catch (SQLException e) {
@@ -65,7 +75,25 @@ public class DAOEmployees extends DAO<Employees> {
 	}
 
 	public boolean update(Employees obj) {
-		try {
+
+		PreparedStatement pstmt = null;
+		
+		try{
+			/*pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE employees SET customerName = ?");		               	
+					
+			pstmt.setLong(1, obj.getCustomerNumber());
+			pstmt.setString(2, obj.getCustomerName());
+			pstmt.setString(3, obj.getContactLastName());
+			pstmt.setString(4, obj.getContactFirstName());
+			pstmt.setString(5, obj.getPhone());
+			pstmt.setString(6, obj.getCity());
+			pstmt.setString(7, obj.getState());
+			pstmt.setString(8, obj.getPostalCode());
+			pstmt.setString(9, obj.getCountry());
+			pstmt.setLong(10, obj.getSalesRepEmployeeNumber());	
+			 
+			 pstmt.execute();*/
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 

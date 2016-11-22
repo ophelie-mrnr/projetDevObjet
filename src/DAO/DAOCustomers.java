@@ -58,10 +58,21 @@ public class DAOCustomers extends DAO<Customers> {
 	}
 
 	public boolean delete(Customers obj) {
+		
+		PreparedStatement pstmt = null;
+		
 		try{
+			pstmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("DELETE FROM customers WHERE CustomerNumber = ?");		               	
+					
+			 pstmt.setLong( 1, obj.getCustomerNumber()); 
+			 pstmt.execute();
+			
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE CustomerNumber ="
 							+ obj.getCustomerNumber());
+			*/
 			return true;
 		}
 		catch (SQLException e) {
@@ -72,7 +83,66 @@ public class DAOCustomers extends DAO<Customers> {
 	}
 
 	public boolean update(Customers obj) {
-		try {
+
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		PreparedStatement pstmt5 = null;
+		PreparedStatement pstmt6 = null;
+		PreparedStatement pstmt7 = null;
+		PreparedStatement pstmt8 = null;
+		PreparedStatement pstmt9 = null;
+		
+		try{
+			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ?");		               	
+			 pstmt1.execute();
+			pstmt1.setString(1, obj.getCustomerName());
+			
+			pstmt2 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerLastName = ?");		               	
+			pstmt2.execute();			
+			pstmt2.setString(1, obj.getContactLastName());
+			
+			pstmt3 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerFirstName = ?");		               	
+			pstmt3.execute();
+			pstmt3.setString(1, obj.getContactFirstName());
+			
+			pstmt4 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET phone = ?");		               	
+			pstmt4.execute();
+			pstmt4.setString(1, obj.getPhone());
+			
+			pstmt5 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET city = ?");		               	
+			pstmt5.execute();
+			pstmt5.setString(1, obj.getCity());
+			
+			pstmt6 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET state = ?");		               	
+			pstmt6.execute();
+			pstmt6.setString(1, obj.getState());
+			
+			pstmt7 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET postalCode = ?");		               	
+			pstmt7.execute();
+			pstmt7.setString(1, obj.getPostalCode());
+			
+			pstmt8 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET country = ?");		               	
+			pstmt8.execute();
+			pstmt8.setString(1, obj.getCountry());
+			
+			pstmt9 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET salesRepEmployeeNumber = ?");		               	
+			pstmt9.execute();
+			pstmt9.setLong(1, obj.getSalesRepEmployeeNumber());	
+			 
+			
+			 
+			 /*
             this .connect
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -89,6 +159,8 @@ public class DAOCustomers extends DAO<Customers> {
                 					+ ", salesRepEmployeeNumber = '"+obj.getSalesRepEmployeeNumber()
                 					+" WHERE customerNumber = '" + obj.getCustomerNumber()+"'"
                  );
+                 */
+			 
 		obj = this.find(obj.getCustomerNumber());
 		return true;
     } catch (SQLException e) {
@@ -104,6 +176,7 @@ public class DAOCustomers extends DAO<Customers> {
 		Customers customers = new Customers();
 
 		try{
+		
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Customers where CustomerNumber = " + id);
