@@ -1,6 +1,8 @@
 package Interface;
 
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -38,25 +40,41 @@ public class GraphePieChart  {
      * @return A sample dataset.
      */
     private static PieDataset createDataset() {
+    	List<List> resultatListe = new ArrayList<List>();
+    	String query = VisualisationLibre.getRequete();
+    //	resultatListe = VisualisationLibre.getResultat("SELECT productName, buyPrice FROM Products WHERE productCode = 'S10_1678';");
+    	resultatListe = VisualisationLibre.getResultat(query);
+    	ArrayList<String> resultatListeString = new ArrayList<String>();
+    	ArrayList<Double> resultatListeNombre = new ArrayList<Double>();
+
+
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("One", new Integer(2));
-        dataset.setValue("Two", new Double(10.0));
-        dataset.setValue("Three", new Double(27.5));
-        dataset.setValue("Four", new Double(17.5));
-        dataset.setValue("Five", new Double(11.0));
-        dataset.setValue("Six", new Double(19.4));
-        return dataset;        
+        System.out.println("Test du piechart :");
+
+        for(int j=0; j<resultatListe.size();j++){
+        	resultatListeString.addAll(resultatListe.get(0));
+        }
+
+        for(int c=0; c<resultatListe.size();c++){
+        	resultatListeNombre.addAll(resultatListe.get(1));
+        }
+        
+        for(int i=0; i<resultatListe.size();i++){
+        	dataset.setValue(resultatListeString.get(i), new Double(resultatListeNombre.get(i)));                    
+       }
+        return dataset;
     }
-    
-    /**
+
+
+	/**
      * Creates a chart.
-     * 
+     *
      * @param dataset  the dataset.
-     * 
+     *
      * @return A chart.
      */
     private static JFreeChart createChart(PieDataset dataset) {
-        
+
         JFreeChart chart = ChartFactory.createPieChart(
             "Pie Chart Demo 1",  // chart title
             dataset,             // data
@@ -71,13 +89,12 @@ public class GraphePieChart  {
         plot.setCircular(false);
         plot.setLabelGap(0.02);
         return chart;
-        
     }
-    
-    public GraphePieChart() {
 
+    public GraphePieChart() {
     	JFreeChart chart = createChart(createDataset());
 		cp = new ChartPanel(chart);
+		
     }
-	
+
 }
