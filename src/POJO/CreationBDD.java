@@ -26,12 +26,13 @@ public class CreationBDD {
 			//STEP 1: Register JDBC driver
 			Class. forName( "com.mysql.jdbc.Driver" );
 			//STEP 2: Open a connection
-			System. out.println("Connexion � la base de donn�es en cours");
+			System. out.println("Connexion a la base de donnees en cours");
 			System. out.println(" ");
 			conn = DriverManager. getConnection( DB_URL, USER, PASS);
 			System.out.println("Le connexion est etablie ");
 			//STEP 3: Execute a query
-			System. out.println("Creation de la base de donn�es en cours");
+			System. out.println(" ");
+			System. out.println("Creation de la base de donnees en cours");
 			System. out.println(" ");
 			stmt = conn.createStatement();
 
@@ -41,7 +42,9 @@ public class CreationBDD {
 			    while (rs1.next()) {
 			        if (rs1.getString(1).equals("schemadevobj"))
 			            exist = true;
+			        	
 			    }
+			    System. out.println( "La base de donnees est deja cree !" );
 			
 			    // Si la base de données n'existe pas
 			if (exist==false){
@@ -214,6 +217,7 @@ public class CreationBDD {
 				se.printStackTrace();
 			} //end finally try
 		} //end try
+		System. out.println(" ");
 		System. out.println( "Goodbye!" );
 	}
 

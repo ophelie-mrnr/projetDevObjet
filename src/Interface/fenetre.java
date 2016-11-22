@@ -47,7 +47,7 @@ public class fenetre extends javax.swing.JFrame {
     }
 
     private void initComponents() {
-    	this.setTitle("Interface de gestion de base de données");
+    	this.setTitle("Interface de gestion de base de donnees");
     	
     	Handler fh;
     	try {
