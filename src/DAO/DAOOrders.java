@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,7 +17,22 @@ public class DAOOrders extends DAO<Orders> {
 	}
 
 	public boolean create(Orders obj) {
+
+		PreparedStatement stmt = null;
+		
 		try{
+			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Orders VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stmt.setLong(1, obj.getOrderNumber());
+			stmt.setString(2, obj.getOrderDate());
+			stmt.setString(3, obj.getRequiredDate());
+			stmt.setString(4, obj.getShippedDate());
+			stmt.setString(5, obj.getStatus());	
+			stmt.setString(6, obj.getComments());	
+			stmt.setLong(7, obj.getCustomerNumber());	
+			
+			stmt.execute();
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Orders "
 						+ "VALUES (obj.getOrderNumber(),"
@@ -26,6 +42,7 @@ public class DAOOrders extends DAO<Orders> {
 						+ "obj.getStatus()"
 						+ "obj.getComments()"
 						+ "obj.getCustomerNumber()");
+			 */
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

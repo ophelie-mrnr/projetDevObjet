@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -17,13 +18,26 @@ public class DAOPayments extends DAO<Payments> {
 
 
 	public boolean create(Payments obj) {
+
+		PreparedStatement stmt = null;
+		
 		try{
+			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Payments VALUES (?, ?, ?, ?)");
+			stmt.setLong(1, obj.getCustomerNumber());
+			stmt.setString(2, obj.getCheckNumber());
+			stmt.setString(3, obj.getPaymentDate());
+			stmt.setLong(4, (long) obj.getAmount());
+			
+			stmt.execute();
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Payments "
 						+ "VALUES (obj.getCustomerNumber(),"
 						+ "obj.getCheckNumber(),"
 						+ "obj.getPaymentDate(),"
 						+ "obj.getAmount()");
+			 */
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

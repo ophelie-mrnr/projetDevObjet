@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,7 +17,25 @@ public class DAOCustomers extends DAO<Customers> {
 	}
 
 	public boolean create(Customers obj) {
+		
+		PreparedStatement stmt = null;
 		try{
+			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Customers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			stmt.setLong(1, obj.getCustomerNumber());
+			stmt.setString(2, obj.getCustomerName());
+			stmt.setString(3, obj.getContactLastName());
+			stmt.setString(4, obj.getContactFirstName());
+			stmt.setString(5, obj.getPhone());
+			stmt.setString(6, obj.getCity());
+			stmt.setString(7, obj.getState());
+			stmt.setString(8, obj.getPostalCode());
+			stmt.setString(9, obj.getCountry());
+			stmt.setLong(10, obj.getSalesRepEmployeeNumber());			
+			
+			stmt.execute();
+			
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Customers "
 					+ "VALUES (obj.getCustomerNumber(),"
@@ -29,6 +48,7 @@ public class DAOCustomers extends DAO<Customers> {
 					+ "obj.getPostalCode(),"
 					+ "obj.getCountry(),"
 					+ "obj.getSalesRepEmployeeNumber()");
+			 */	
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,11 +17,22 @@ public class DAOProductlines extends DAO<Productlines> {
 	}
 		
 	public boolean create(Productlines obj) {
+
+		PreparedStatement stmt = null;
+		
 		try{
+			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Productlines VALUES (?, ?)");
+			stmt.setString(1, obj.getProductLine());
+			stmt.setString(2, obj.getTextDescription());	
+			
+			stmt.execute();
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Productlines "
 						+ "VALUES (obj.getProductLine(),"
 						+ "obj.getTextDescription()");
+			 */
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

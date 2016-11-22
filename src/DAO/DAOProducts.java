@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,7 +26,24 @@ public class DAOProducts extends DAO<Products> {
 	}
 
 	public boolean create(Products obj) {
+
+		PreparedStatement stmt = null;
+		
 		try{
+			/*stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Products VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stmt.setString(1, obj.getProductCode());
+			stmt.setString(2, obj.getProductName());
+			stmt.setString(3, obj.getProductLine());
+			stmt.setImageIcon(4, obj.getPhoto());
+			stmt.setString(5, obj.getProductVendor());	
+			stmt.setString(6, obj.getProductDescription());	
+			stmt.setLong(7, obj.getQuantityInStock());	
+			stmt.setLong(8, (long) obj.getBuyPrice());
+			stmt.setLong(9, (long) obj.getMSRP());
+			
+			stmt.execute();*/
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Products "
    					+ "VALUES (obj.getProductCode(),"
@@ -37,6 +55,7 @@ public class DAOProducts extends DAO<Products> {
    					+ "obj.getQuantityInStock()"
    					+ "obj.getBuyPrice()"
    					+ "obj.getMSRP()");
+			 
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

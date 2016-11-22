@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,7 +17,22 @@ public class DAOOffices extends DAO<Offices> {
 	}
 
 	public boolean create(Offices obj) {
+		
+		PreparedStatement stmt = null;
+		
 		try{
+			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Offices VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stmt.setString(1, obj.getOfficeCode());
+			stmt.setString(2, obj.getCity());
+			stmt.setString(3, obj.getPhone());
+			stmt.setString(4, obj.getAddressLine());
+			stmt.setString(5, obj.getState());
+			stmt.setString(6, obj.getCountry());
+			stmt.setString(7, obj.getPostalCode());			
+			
+			stmt.execute();
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Offices "
 						+ "VALUES (obj.getOfficeCode(),"
@@ -26,6 +42,7 @@ public class DAOOffices extends DAO<Offices> {
 						+ "obj.getState(),"
 						+ "obj.getCountry(),"
 						+ "obj.getPostalCode()");
+			 */
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);

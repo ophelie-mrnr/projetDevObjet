@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,7 +16,22 @@ public class DAOEmployees extends DAO<Employees> {
 		super(conn);
 	}
 	public boolean create(Employees obj) {
+		
+		PreparedStatement stmt = null;
+		
 		try{
+			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Employees VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stmt.setLong(1, obj.getEmployeeNumber());
+			stmt.setString(2, obj.getLastName());
+			stmt.setString(3, obj.getFirstName());
+			stmt.setString(4, obj.getEmail());
+			stmt.setString(5, obj.getOfficeCode());
+			stmt.setLong(6, obj.getReportsTo());
+			stmt.setString(7, obj.getJobTitle());			
+			
+			stmt.execute();
+			/*
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Employees "
    					+ "VALUES (obj.getEmployeeNumber(),"
@@ -25,6 +41,7 @@ public class DAOEmployees extends DAO<Employees> {
    					+ "obj.getOfficeCode(),"
    					+ "obj.getReportsTo(),"
    					+ "obj.getJobTitle()");
+   			*/
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
