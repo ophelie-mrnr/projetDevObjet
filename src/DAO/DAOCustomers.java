@@ -184,7 +184,6 @@ public class DAOCustomers extends DAO<Customers> {
 		Customers customers = new Customers();
 
 		try{
-			LOGGER.log(Level.INFO, "Requete SELECT");
 		
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,

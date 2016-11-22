@@ -21,6 +21,8 @@ public class DAOOffices extends DAO<Offices> {
 		PreparedStatement stmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Offices VALUES (?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, obj.getOfficeCode());
@@ -53,6 +55,8 @@ public class DAOOffices extends DAO<Offices> {
 
 	public boolean delete(Offices obj) {
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE officeCode ="
 							+ obj.getOfficeCode());
@@ -67,6 +71,8 @@ public class DAOOffices extends DAO<Offices> {
 
 	public boolean update(Offices obj) {
 		try {
+			LOGGER.log(Level.INFO, "Requete UPDATE");
+			
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -97,6 +103,7 @@ public class DAOOffices extends DAO<Offices> {
 		Offices offices = new Offices();
 
 		try{
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Offices where officeCode = " + id);

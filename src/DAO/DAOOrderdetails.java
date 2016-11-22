@@ -21,6 +21,8 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 		PreparedStatement stmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Orderdetails VALUES (?, ?, ?, ?, ?)");
 			stmt.setLong(1, obj.getOrderNumber());
@@ -49,6 +51,8 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 
 	public boolean delete(Orderdetails obj) {
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE orderNumber ="
 							+ obj.getOrderNumber());
@@ -63,6 +67,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 
 	public boolean update(Orderdetails obj) {
 		try {
+			LOGGER.log(Level.INFO, "Requete UPDATE");
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -87,6 +92,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 		Orderdetails orderdetails = new Orderdetails();
 
 		try{
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Orderdetails where orderNumber = " + id);

@@ -121,9 +121,12 @@ public class DAOProducts extends DAO<Products> {
 	}
 
 	public Products read(String id) {
+		
 		Products product = new Products();
 		ImageIcon icon = null;
-		try{
+		
+		try{		
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Products where productCode = '" + id+ "';");

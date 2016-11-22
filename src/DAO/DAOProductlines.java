@@ -21,6 +21,8 @@ public class DAOProductlines extends DAO<Productlines> {
 		PreparedStatement stmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Productlines VALUES (?, ?)");
 			stmt.setString(1, obj.getProductLine());
@@ -42,7 +44,10 @@ public class DAOProductlines extends DAO<Productlines> {
 	}
 
 	public boolean delete(Productlines obj) {
+		
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE productLine ="
 							+ obj.getProductLine());
@@ -56,7 +61,10 @@ public class DAOProductlines extends DAO<Productlines> {
 	}
 
 	public boolean update(Productlines obj) {
+		
 		try {
+			LOGGER.log(Level.INFO, "Requete UPDATE");
+			
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -83,6 +91,7 @@ public class DAOProductlines extends DAO<Productlines> {
 		Productlines productline = new Productlines();
 
 		try{
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Productlines where productLine = " + id);

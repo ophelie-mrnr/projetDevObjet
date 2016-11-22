@@ -22,6 +22,8 @@ public class DAOPayments extends DAO<Payments> {
 		PreparedStatement stmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete INSERT");
+			
 			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Payments VALUES (?, ?, ?, ?)");
 			stmt.setLong(1, obj.getCustomerNumber());
@@ -47,7 +49,10 @@ public class DAOPayments extends DAO<Payments> {
 	}
 
 	public boolean delete(Payments obj) {
+		
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE customerNumber ="
 							+ obj.getCustomerNumber());
@@ -61,7 +66,10 @@ public class DAOPayments extends DAO<Payments> {
 	}
 
 	public boolean update(Payments obj) {
+		
 		try {
+			LOGGER.log(Level.INFO, "Requete UPDATE");
+			
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
@@ -85,6 +93,7 @@ public class DAOPayments extends DAO<Payments> {
 		Payments payment = new Payments();
 
 		try{
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Payments where customerNumber = " + id);

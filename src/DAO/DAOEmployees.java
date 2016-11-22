@@ -126,7 +126,6 @@ public class DAOEmployees extends DAO<Employees> {
 		Employees employees = new Employees();
 
 		try{
-			LOGGER.log(Level.INFO, "Requete SELECT");
 			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
