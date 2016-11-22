@@ -171,6 +171,7 @@ public String[] creationComboBox(){
 
 
 	} catch (SQLException e) {
+		LOGGER.log(Level.SEVERE, "Exception occur", e);
 		e.printStackTrace();
 	}
 	return tab;

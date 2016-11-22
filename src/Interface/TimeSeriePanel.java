@@ -2,6 +2,8 @@ package Interface;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -15,6 +17,7 @@ import DAO.MaConnexion;
 
 public class TimeSeriePanel{
 
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	ChartPanel cp ; 
 	TimeSeriesCollection tsc;
@@ -110,16 +113,19 @@ public class TimeSeriePanel{
 
 								}
 								catch (SQLException e3){
+									LOGGER.log(Level.SEVERE, "Exception occur", e3);
 									e3.printStackTrace();
 								}
 							}
 							catch (SQLException e2) {
+								LOGGER.log(Level.SEVERE, "Exception occur", e2);
 								e2.printStackTrace();
 							}
 						}
 					}
 				} 
 				catch (SQLException e1) {
+					LOGGER.log(Level.SEVERE, "Exception occur", e1);
 					e1.printStackTrace();
 				}
 
@@ -192,16 +198,19 @@ public class TimeSeriePanel{
 
 									}
 									catch (SQLException e3){
+										LOGGER.log(Level.SEVERE, "Exception occur", e3);
 										e3.printStackTrace();
 									}
 								}
 								catch (SQLException e2) {
+									LOGGER.log(Level.SEVERE, "Exception occur", e2);
 									e2.printStackTrace();
 								}
 							}
 						}
 					} 
 					catch (SQLException e1) {
+						LOGGER.log(Level.SEVERE, "Exception occur", e1);
 						e1.printStackTrace();
 					}
 
@@ -217,6 +226,7 @@ public class TimeSeriePanel{
 				}
 			}
 			catch (SQLException e) {
+				LOGGER.log(Level.SEVERE, "Exception occur", e);
 				e.printStackTrace();
 			}
 		}

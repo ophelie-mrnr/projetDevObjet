@@ -8,6 +8,7 @@ package Interface;
 import java.awt.BorderLayout;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JPanel;
@@ -170,8 +171,11 @@ public class VisualisationLibre extends javax.swing.JPanel {
             state.close();
             System.out.println("Coucou c'est cool");
           }
-          catch(Exception e){ resultatStringFinal = "Introuvable";
-          System.out.println("non c'est pas cool");}
+          catch(Exception e){ 
+        		LOGGER.log(Level.SEVERE, "Exception occur", e);
+        		resultatStringFinal = "Introuvable";
+        		System.out.println("non c'est pas cool");
+        		}
 
           return listeResultat;
     }
