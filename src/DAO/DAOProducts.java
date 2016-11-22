@@ -6,12 +6,17 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import POJO.Products;
 
 public class DAOProducts extends DAO<Products> {
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 	
 	BufferedImage img;
 	
@@ -34,6 +39,7 @@ public class DAOProducts extends DAO<Products> {
    					+ "obj.getMSRP()");
 		}
 		catch(Exception e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			return false;
 	}
 		return true;
@@ -47,6 +53,7 @@ public class DAOProducts extends DAO<Products> {
 			return true;
 		}
 		catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
 		}
@@ -75,6 +82,7 @@ public class DAOProducts extends DAO<Products> {
 		obj = this.read(obj.getProductLine());
 		return true;
 		} catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
     	}
@@ -113,6 +121,7 @@ public class DAOProducts extends DAO<Products> {
 					);
 			}
 		} catch(SQLException | IOException e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
 		return product;

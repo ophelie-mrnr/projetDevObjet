@@ -2,11 +2,15 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import POJO.Payments;
 
 public class DAOPayments extends DAO<Payments> {
 
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
+	
 	public DAOPayments(Connection conn) {
 		super(conn);
 	}
@@ -22,6 +26,7 @@ public class DAOPayments extends DAO<Payments> {
 						+ "obj.getAmount()");
 		}
 		catch(Exception e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			return false;
 	}
 		return true;
@@ -35,6 +40,7 @@ public class DAOPayments extends DAO<Payments> {
 			return true;
 		}
 		catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
 		}
@@ -55,6 +61,7 @@ public class DAOPayments extends DAO<Payments> {
 		obj = this.find(obj.getCustomerNumber());
 		return true;
     } catch (SQLException e) {
+    		LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
     }
@@ -76,6 +83,7 @@ public class DAOPayments extends DAO<Payments> {
 						);
 
 		} catch(SQLException e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
 		return payment;

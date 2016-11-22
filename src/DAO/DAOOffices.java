@@ -2,10 +2,14 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import POJO.Offices;
 
 public class DAOOffices extends DAO<Offices> {
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	public DAOOffices(Connection conn) {
 		super(conn);
@@ -24,6 +28,7 @@ public class DAOOffices extends DAO<Offices> {
 						+ "obj.getPostalCode()");
 		}
 		catch(Exception e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			return false;
 	}
 		return true;
@@ -37,6 +42,7 @@ public class DAOOffices extends DAO<Offices> {
 			return true;
 		}
 		catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
 		}
@@ -60,6 +66,7 @@ public class DAOOffices extends DAO<Offices> {
 		obj = this.read(obj.getOfficeCode());
 		return true;
     } catch (SQLException e) {
+    	LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
     }
@@ -88,6 +95,7 @@ public class DAOOffices extends DAO<Offices> {
 						);
 
 		} catch(SQLException e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
 		return offices;

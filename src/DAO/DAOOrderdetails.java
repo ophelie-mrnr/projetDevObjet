@@ -2,11 +2,15 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import POJO.Orderdetails;
 
 public class DAOOrderdetails extends DAO<Orderdetails> {
 
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
+	
 	public DAOOrderdetails(Connection conn) {
 		super(conn);
 	}
@@ -22,6 +26,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 						+ "obj.getOrderLineNumber()");
 		}
 		catch(Exception e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			return false;
 	}
 		return true;
@@ -35,6 +40,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 			return true;
 		}
 		catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
 		}
@@ -56,6 +62,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 		obj = this.find(obj.getOrderNumber());
 		return true;
     } catch (SQLException e) {
+    		LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
     }
@@ -78,6 +85,7 @@ public class DAOOrderdetails extends DAO<Orderdetails> {
 						);
 
 		} catch(SQLException e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
 		return orderdetails;

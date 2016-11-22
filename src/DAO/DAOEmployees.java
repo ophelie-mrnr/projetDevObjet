@@ -2,10 +2,14 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import POJO.Employees;
 
 public class DAOEmployees extends DAO<Employees> {
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	public DAOEmployees(Connection conn) {
 		super(conn);
@@ -23,6 +27,7 @@ public class DAOEmployees extends DAO<Employees> {
    					+ "obj.getJobTitle()");
 		}
 		catch(Exception e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			return false;
 	}
 		return true;
@@ -36,6 +41,7 @@ public class DAOEmployees extends DAO<Employees> {
 			return true;
 		}
 		catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
 		}
@@ -59,6 +65,7 @@ public class DAOEmployees extends DAO<Employees> {
 		obj = this.find(obj.getEmployeeNumber());
 		return true;
     } catch (SQLException e) {
+    		LOGGER.log(Level.SEVERE, "Exception occur", e);
             e.printStackTrace();
             return false;
     }
@@ -85,6 +92,7 @@ public class DAOEmployees extends DAO<Employees> {
 
 
 		} catch(SQLException e){
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
 		return employees;

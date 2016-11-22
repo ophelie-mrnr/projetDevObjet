@@ -517,6 +517,7 @@ public class GestionsProduits extends javax.swing.JPanel {
         }
         
 	} catch (SQLException e) {
+		LOGGER.log(Level.SEVERE, "Exception occur", e);
 		e.printStackTrace();
 	}
     	

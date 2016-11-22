@@ -3,10 +3,14 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import POJO.*;
 
 public class GO {
+	
+	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	public GO(){
 		
@@ -30,6 +34,7 @@ public class GO {
 	        }
 	        
 		} catch (SQLException e) {
+			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
 
