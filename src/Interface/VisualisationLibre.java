@@ -71,7 +71,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		jPanelTableau = new javax.swing.JPanel();
 
 		texteRequete = new javax.swing.JTextArea(5,20);
-
+		texteRequete.setLineWrap(true); 
 		jTable2 = new javax.swing.JTable();
 
 		enregistrer.setText("Enregistrer");
@@ -102,21 +102,21 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 		LOGGER.log(Level.INFO, "Le bouton Enregistrer de la page Visualisation libre fait son action");
 		
-		// Récupération de la requête de la zone de texte
+		// Rï¿½cupï¿½ration de la requï¿½te de la zone de texte
 		String requete = "";
 		requete = texteRequete.getText();
 
-		// Test si la requête est valide
+		// Test si la requï¿½te est valide
 		requeteValide(requete);
 
-		// Création de la liste de listes contenant le résultat des requêtes
+		// Crï¿½ation de la liste de listes contenant le rï¿½sultat des requï¿½tes
 		List<List> resultatListeTest = new ArrayList<List>();
 		resultatListeTest =  getResultat(requete);
 
-		// Nous supprimons l'affichage précédent
+		// Nous supprimons l'affichage prï¿½cï¿½dent
 		jPanelMain.removeAll();
 
-		// Test si la deuxième liste (donc deuxième colonne du résultat) contient seulement des nombres
+		// Test si la deuxiï¿½me liste (donc deuxiï¿½me colonne du rï¿½sultat) contient seulement des nombres
 		try{
 			double test=0;
 			for(int i = 0 ; i < resultatListeTest.get(1).size() ; i++)
@@ -136,16 +136,16 @@ public class VisualisationLibre extends javax.swing.JPanel {
 	}
 		catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
-			// Sinon, on traite le cas de toutes les autres requêtes
+			// Sinon, on traite le cas de toutes les autres requï¿½tes
 
-			// Et on crée alors le tableau qui récupère les deux tableaux : tableau de données et tableau de titres
+			// Et on crï¿½e alors le tableau qui rï¿½cupï¿½re les deux tableaux : tableau de donnï¿½es et tableau de titres
 
 			 jTable2.setModel(new javax.swing.table.DefaultTableModel(
 			            donneesJtable(requete),
 			           titreJtable(requete)
 			        ));
 
-			 // Affichage du tableau avec les en tête
+			 // Affichage du tableau avec les en tï¿½te
 
 			jPanelTableau.add(jTable2.getTableHeader());
 			jPanelMain.add(jPanelTableau);
@@ -333,7 +333,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 			{
 				for(j = 1;j<nbClumn+1;j++)
 				{
-					System.out.println("j est égal à" + j);
+					System.out.println("j est ï¿½gal ï¿½" + j);
 					System.out.println("nombre de colonnes " + nbClumn);
 					System.out.println("test de metadata :" + metadata.getColumnName(j));
 					donnees[i][j-1] = resPC.getObject(metadata.getColumnName(j));
