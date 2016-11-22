@@ -13,7 +13,7 @@ public class CreationBDD {
 
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;
 	public static final String USER = "root" ;
-	public static final String PASS = "" ;
+	public static final String PASS = "root" ;
 	
 	public static Statement stmt1 = null;
 
@@ -26,21 +26,26 @@ public class CreationBDD {
 			//STEP 1: Register JDBC driver
 			Class. forName( "com.mysql.jdbc.Driver" );
 			//STEP 2: Open a connection
-			System. out.println("Connexion à la base de données en cours");
+			System. out.println("Connexion ï¿½ la base de donnï¿½es en cours");
 			System. out.println(" ");
 			conn = DriverManager. getConnection( DB_URL, USER, PASS);
 			System.out.println("Le connexion est etablie ");
 			//STEP 3: Execute a query
-			System. out.println("Creation de la base de données en cours");
+			System. out.println("Creation de la base de donnï¿½es en cours");
 			System. out.println(" ");
 			stmt = conn.createStatement();
 
-			//suppression de la base de donnï¿½e
-			String q = "DROP DATABASE IF EXISTS schemadevobj";
-			stmt.executeUpdate(q);
-			System. out.println("La base de donnees est bien supprimee !");
-
-
+			boolean exist = false;
+			 ResultSet rs1 = stmt.executeQuery("show databases;");
+			 // On stock dans le boolean exist "true" si la base de donnÃ©es existe, false sinon.
+			    while (rs1.next()) {
+			        if (rs1.getString(1).equals("schemadevobj"))
+			            exist = true;
+			    }
+			
+			    // Si la base de donnÃ©es n'existe pas
+			if (exist==false){
+				
 			String sq = "CREATE DATABASE schemadevobj" ;
 			stmt.executeUpdate(sq);
 			System. out.println( "La base de donnees est bien cree !" );
@@ -182,6 +187,7 @@ public class CreationBDD {
 		    }
 		    }
 		    br.close();
+			}
 
 		} catch (SQLException se){
 			//Handle errors for JDBC

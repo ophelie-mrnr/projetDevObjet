@@ -40,7 +40,7 @@ public class fenetre extends javax.swing.JFrame {
     }
 
     private void initComponents() {
-
+    	this.setTitle("Interface de gestion de base de données");
     	Handler fh;
     	try {
     		LOGGER.setUseParentHandlers(false); // POUR NE PAS AFFICHER SUR LA CONSOLE (PAR DEFAUT)
