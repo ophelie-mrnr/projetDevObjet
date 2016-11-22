@@ -83,7 +83,7 @@ public class DAOProducts extends DAO<Products> {
 	public boolean update(Products obj) {
 		try {
 
-			System.out.println("BEGIN UPDATE");
+			LOGGER.log(Level.INFO, "BEGIN UPDATE");
             this.connect
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE,
