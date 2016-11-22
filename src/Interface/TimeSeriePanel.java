@@ -40,8 +40,11 @@ public class TimeSeriePanel{
 
 	public static TimeSeries createTimeSeries(String title, String dateDeb, String dateFin, String pays){
 
-
-		TimeSeries timeSeries = new TimeSeries(title);
+		TimeSeries timeSeries ;
+		if (pays=="All")
+			timeSeries = new TimeSeries("ventes partout du "+ dateDeb+ " au "+ dateFin+"");
+		else 
+			timeSeries = new TimeSeries("ventes en "+pays+" du "+ dateDeb+ " au "+ dateFin+"");
 		java.sql.Statement state0;
 		java.sql.Statement state;
 		java.sql.Statement state1;
@@ -127,7 +130,6 @@ public class TimeSeriePanel{
 					LOGGER.log(Level.SEVERE, "Exception occur", e1);
 					e1.printStackTrace();
 				}
-
 				timeSeries.addOrUpdate(new Day(jourDeb,moisDeb,anneeDeb), revenu);
 				// incrementation de la date
 				dateDeb = suivant(jourDeb,moisDeb,anneeDeb);
@@ -212,8 +214,8 @@ public class TimeSeriePanel{
 						LOGGER.log(Level.SEVERE, "Exception occur", e1);
 						e1.printStackTrace();
 					}
-
 					timeSeries.addOrUpdate(new Day(jourDeb,moisDeb,anneeDeb), revenu);
+					
 					// incrementation de la date
 					dateDeb = suivant(jourDeb,moisDeb,anneeDeb);
 					jourDeb = jourToInt(dateDeb);
