@@ -161,7 +161,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 			        ));
 
-			 // affichage de l'image dans le Jtable
+
 			 // on parcours cellule par cellule
 			 for(int i = 0; i < donnees.length; i++){
 				   for(int j = 0; j < donnees[i].length; j++){

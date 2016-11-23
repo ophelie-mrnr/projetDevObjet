@@ -54,7 +54,7 @@ public class fenetre extends javax.swing.JFrame {
     	
     	Handler fh;
     	
-    	try 
+     	try 
         {
             UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");// Nom du package contenant le Look And Feel.
             SwingUtilities.updateComponentTreeUI(this); 
@@ -77,7 +77,7 @@ public class fenetre extends javax.swing.JFrame {
             e.printStackTrace();
         } // Exception
 
-    	
+    
     	try {
     		LOGGER.setUseParentHandlers(false); // POUR NE PAS AFFICHER SUR LA CONSOLE (PAR DEFAUT)
 			fh = new FileHandler("myLog.log", true); // pour envoyer le flux de sortie vers le fichier myLog.log

@@ -20,7 +20,7 @@ public class TimeSeriePanel{
 
 	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
-	ChartPanel cp ; 
+	ChartPanel cp ;
 	TimeSeriesCollection tsc;
 	JFreeChart tc;
 
@@ -42,15 +42,12 @@ public class TimeSeriePanel{
 	public static TimeSeries createTimeSeries(String title, String dateDeb, String dateFin, String pays){
 
 		TimeSeries timeSeries ;
-		if (pays=="All")
-			timeSeries = new TimeSeries("ventes partout du "+ dateDeb+ " au "+ dateFin+"");
-		else 
-			timeSeries = new TimeSeries("ventes en "+pays+" du "+ dateDeb+ " au "+ dateFin+"");
+
 		java.sql.Statement state0;
 		java.sql.Statement state;
 		java.sql.Statement state1;
 		java.sql.Statement state2;
-		ArrayList<String> liste = new ArrayList<String>(); 
+		ArrayList<String> liste = new ArrayList<String>();
 
 		int revenu =0;
 		int jourDeb =0 , moisDeb =0 , anneeDeb=0;
@@ -58,7 +55,7 @@ public class TimeSeriePanel{
 
 		// On cherche a mettre les deux dates sous forme : jj-mm-aaaa
 
-		// Si l'utilisateur n'a pas mis de date la date de debut va corresprondre a la premiere date de la bdd 
+		// Si l'utilisateur n'a pas mis de date la date de debut va corresprondre a la premiere date de la bdd
 		if (dateDeb.equals("aaaa-mm-jj") || dateDeb.equals("")  ){
 			try {
 				state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -77,6 +74,7 @@ public class TimeSeriePanel{
 		moisDeb = moisToInt(dateDeb);
 		anneeDeb = anneeToInt(dateDeb);
 		dateDeb = dateToString(jourDeb,moisDeb , anneeDeb);
+
 
 		// Si l'utilisateur n'a pas mis la date, la date de din correspondra a la date la plus récente
 		if (dateFin.equals("aaaa-mm-jj") || dateFin.equals("")  ){
@@ -99,6 +97,10 @@ public class TimeSeriePanel{
 		anneeFin = anneeToInt(dateFin);
 		dateFin = dateToString(jourFin, moisFin, anneeFin );
 
+		if (pays=="All")
+			timeSeries = new TimeSeries("ventes partout du "+ dateDeb+ " au "+ dateFin+"");
+		else
+			timeSeries = new TimeSeries("ventes en "+pays+" du "+ dateDeb+ " au "+ dateFin+"");
 
 		//On incrémente le jour de fin pour aller jusque jour de fin voulu
 		dateFin = suivant(jourToInt(dateFin),moisToInt(dateFin),anneeToInt(dateFin));
@@ -114,7 +116,7 @@ public class TimeSeriePanel{
 
 					ResultSet res =state.executeQuery(query);
 
-					liste = new ArrayList<String>(); 
+					liste = new ArrayList<String>();
 					while (res.next()){
 						String resultat = res.getString("orderNumber");
 						liste.add(resultat);
@@ -123,8 +125,8 @@ public class TimeSeriePanel{
 					if (liste.size()!=0){
 						for (int i = 0; i<liste.size(); i++){
 							try{
-								ArrayList<Integer> listePrix = new ArrayList<Integer>(); 
-								ArrayList<Integer> listeQuantite = new ArrayList<Integer>(); 
+								ArrayList<Integer> listePrix = new ArrayList<Integer>();
+								ArrayList<Integer> listeQuantite = new ArrayList<Integer>();
 								state1 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 								String query1 = "SELECT priceEach FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
 								ResultSet res1 =	state1.executeQuery(query1);
@@ -159,7 +161,7 @@ public class TimeSeriePanel{
 							}
 						}
 					}
-				} 
+				}
 				catch (SQLException e1) {
 					LOGGER.log(Level.SEVERE, "Exception occur", e1);
 					e1.printStackTrace();
@@ -197,18 +199,18 @@ public class TimeSeriePanel{
 
 							ResultSet res =state.executeQuery(query);
 
-							liste = new ArrayList<String>(); 
+							liste = new ArrayList<String>();
 
 							while (res.next()){
 								String resultat = res.getString("orderNumber");
 								liste.add(resultat);
 							}
-						}	
+						}
 						if (liste.size()!=0){
 							for (int i = 0; i<liste.size(); i++){
 								try{
-									ArrayList<Integer> listePrix = new ArrayList<Integer>(); 
-									ArrayList<Integer> listeQuantite = new ArrayList<Integer>(); 
+									ArrayList<Integer> listePrix = new ArrayList<Integer>();
+									ArrayList<Integer> listeQuantite = new ArrayList<Integer>();
 									state1 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 									String query1 = "SELECT priceEach FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
 									ResultSet res1 =	state1.executeQuery(query1);
@@ -243,7 +245,7 @@ public class TimeSeriePanel{
 								}
 							}
 						}
-					} 
+					}
 					catch (SQLException e1) {
 						LOGGER.log(Level.SEVERE, "Exception occur", e1);
 						e1.printStackTrace();
@@ -283,7 +285,7 @@ public class TimeSeriePanel{
 		String jour = s;
 		String mois = s;
 		String annee = s;
-		// Initialisation 
+		// Initialisation
 		int premierTrait =jour.indexOf("-");
 		annee = annee.substring(0, premierTrait);
 		mois = mois.substring(premierTrait+1);
@@ -292,7 +294,7 @@ public class TimeSeriePanel{
 		jour = jour.substring(premierTrait+secondTrait+2);
 
 		// Conversion en int
-		int j = Integer.parseInt(jour); 
+		int j = Integer.parseInt(jour);
 		return j;
 	}
 
@@ -300,14 +302,14 @@ public class TimeSeriePanel{
 	public static int moisToInt(String s){
 		String mois = s;
 		String annee = s;
-		// Initialisation 
+		// Initialisation
 		int premierTrait =annee.indexOf("-");
 		annee = annee.substring(0, premierTrait);
 		mois = mois.substring(premierTrait+1);
 		int secondTrait = mois.indexOf("-");
 		mois = mois.substring(0, secondTrait);
 		// conversion en int
-		int m = Integer.parseInt(mois); 
+		int m = Integer.parseInt(mois);
 		return m;
 	}
 
@@ -315,7 +317,7 @@ public class TimeSeriePanel{
 	public static int anneeToInt(String s){
 
 		String annee = s;
-		// Initialisation 
+		// Initialisation
 		int premierTrait =annee.indexOf("-");
 		annee = annee.substring(0, premierTrait);
 		// conversion en int
@@ -346,7 +348,7 @@ public class TimeSeriePanel{
 	}
 
 	// Fonction qui permet de savoir si une annee est bissextile
-	public  static boolean bissextile(int a){ 
+	public  static boolean bissextile(int a){
 		if((a%4==0 && a%100!=0)||(a%400 == 0)){
 			return true;
 		}else {
@@ -356,7 +358,7 @@ public class TimeSeriePanel{
 
 	// Permet d'incrementer la date
 	public static String suivant(int j, int m, int a){
-		// incrementation de la date 
+		// incrementation de la date
 		if ((j<28) || (j==28 && m!=2) || ((j==28 && m==2) && (bissextile(a) == true))){
 			j++;
 		}
@@ -367,7 +369,7 @@ public class TimeSeriePanel{
 			}
 			else {
 				j = 1;
-				m = 1; 
+				m = 1;
 				a++;
 			}
 		}
