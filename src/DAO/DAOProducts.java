@@ -83,50 +83,53 @@ public class DAOProducts extends DAO<Products> {
 		PreparedStatement pstmt5 = null;
 		PreparedStatement pstmt6 = null;
 		PreparedStatement pstmt7 = null;
-		PreparedStatement pstmt8 = null;
 		
 		try{
 			LOGGER.log(Level.INFO, "Requete UPDATE");
 			
 			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ? ");		               	
-			 pstmt1.execute();
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getProductName = ? WHERE productCode = ?");		               	
+			pstmt1.execute();
 			pstmt1.setString(1, obj.getProductName());
+			pstmt1.setString(2, obj.getProductCode());
 			
 			pstmt2 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerLastName = ?");		               	
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getProductLine = ? WHERE productCode = ?");		               	
 			pstmt2.execute();			
 			pstmt2.setString(1, obj.getProductLine());
+			pstmt2.setString(2, obj.getProductCode());
 			
 			pstmt3 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerFirstName = ?");		               	
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getProductVendor = ? WHERE productCode = ?");		               	
 			pstmt3.execute();
 			pstmt3.setString(1, obj.getProductVendor());
+			pstmt3.setString(2, obj.getProductCode());
 			
 			pstmt4 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET phone = ?");		               	
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getProductDescription = ? WHERE productCode = ?");		               	
 			pstmt4.execute();
 			pstmt4.setString(1, obj.getProductDescription());
+			pstmt4.setString(2, obj.getProductCode());
 			
 			pstmt5 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET city = ?");		               	
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getQuantityInStock = ? WHERE productCode = ?");		               	
 			pstmt5.execute();
 			pstmt5.setLong(1, obj.getQuantityInStock());
+			pstmt5.setString(2, obj.getProductCode());
 			
 			pstmt6 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET state = ?");		               	
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getBuyPrice = ? WHERE productCode = ?");		               	
 			pstmt6.execute();
 			pstmt6.setLong(1, (long) obj.getBuyPrice());
+			pstmt6.setString(2, obj.getProductCode());
 			
 			pstmt7 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET postalCode = ?");		               	
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET getMSRP = ? WHERE productCode = ?");		               	
 			pstmt7.execute();
 			pstmt7.setLong(1, (long) obj.getMSRP());
-			
-			pstmt8 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET country = ?");		               	
-			pstmt8.execute();
-			pstmt8.setString(1, obj.getProductCode());			
+			pstmt7.setString(2, obj.getProductCode());
+					
+						
 			 
 			/*
             this.connect
