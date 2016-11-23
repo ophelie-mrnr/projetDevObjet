@@ -42,40 +42,40 @@ public class VisualisationLibre extends javax.swing.JPanel {
 	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	// Variables declaration
-		private javax.swing.JButton enregistrer;
+	private javax.swing.JButton enregistrer;
 
-		private static javax.swing.JPanel jPanelMain;
+	private static javax.swing.JPanel jPanelMain;
 
-		private static javax.swing.JPanel jPanelPieChart;
-		private static javax.swing.JPanel jPanelTableau;
-
-
-		private static javax.swing.JTable jTable2;
-		private static javax.swing.JTextArea texteRequete;
-
-		public static  String[][] tabstring;
-		public static String [] titre;
-
-		// variables pour le graphe
-		private TimeSeries timeSeries;
-		private static GraphePieChart graphe;
-		private static ChartPanel chartPanel;
-
-		private static boolean piechart =false;
-
-		// End of variables declaration
+	private static javax.swing.JPanel jPanelPieChart;
+	private static javax.swing.JPanel jPanelTableau;
 
 
-    /**
-     * Creates new form NewJPanel
-     */
-    public VisualisationLibre() {
-        initComponents();
-    }
+	private static javax.swing.JTable jTable2;
+	private static javax.swing.JTextArea texteRequete;
 
-    private void initComponents() {
+	public static  String[][] tabstring;
+	public static String [] titre;
 
-    	enregistrer = new javax.swing.JButton();
+	// variables pour le graphe
+	private TimeSeries timeSeries;
+	private static GraphePieChart graphe;
+	private static ChartPanel chartPanel;
+
+	private static boolean piechart =false;
+
+	// End of variables declaration
+
+
+	/**
+	 * Creates new form NewJPanel
+	 */
+	public VisualisationLibre() {
+		initComponents();
+	}
+
+	private void initComponents() {
+
+		enregistrer = new javax.swing.JButton();
 
 		jPanelMain = new javax.swing.JPanel();
 		jPanelPieChart = new javax.swing.JPanel();
@@ -116,20 +116,20 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 		LOGGER.log(Level.INFO, "Le bouton Enregistrer de la page Visualisation libre fait son action");
 
-		// Récupération de la requête de la zone de texte
+		// Rï¿½cupï¿½ration de la requï¿½te de la zone de texte
 		String requete = "";
 		requete = texteRequete.getText();
 
-		// Test si la requête est valide
+		// Test si la requï¿½te est valide
 		requeteValide(requete);
 
-		// Création de la liste de listes contenant le résultat des requêtes
+		// Crï¿½ation de la liste de listes contenant le rï¿½sultat des requï¿½tes
 		List<List> resultatListeTest = new ArrayList<List>();
 		resultatListeTest =  getResultat(requete);
 
-		// Nous supprimons l'affichage précédent
+		// Nous supprimons l'affichage prï¿½cï¿½dent
 
-		// Test si la deuxième liste (donc deuxième colonne du résultat) contient seulement des nombres
+		// Test si la deuxiï¿½me liste (donc deuxiï¿½me colonne du rï¿½sultat) contient seulement des nombres
 		try{
 			double test=0;
 			for(int i = 0 ; i < resultatListeTest.get(1).size() ; i++)
@@ -145,39 +145,39 @@ public class VisualisationLibre extends javax.swing.JPanel {
 			chartPanel.setVisible(true);
 			jPanelPieChart.setVisible(true);
 
-	}
+		}
 		catch (Exception e) {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
-			// Sinon, on traite le cas de toutes les autres requêtes
+			// Sinon, on traite le cas de toutes les autres requï¿½tes
 
-			// Et on créer alors le tableau qui récupère les deux tableaux : tableau de données et tableau de titres
+			// Et on crï¿½er alors le tableau qui rï¿½cupï¿½re les deux tableaux : tableau de donnï¿½es et tableau de titres
 
 
 			Object[][] donnees = donneesJtable(requete);
 			Object[] titres = titreJtable(requete);
 
-			 jTable2.setModel(new javax.swing.table.DefaultTableModel(
-					 donnees, titres
+			jTable2.setModel(new javax.swing.table.DefaultTableModel(
+					donnees, titres
 
-			        ));
+					));
 
 
-			 // on parcours cellule par cellule
-			 for(int i = 0; i < donnees.length; i++){
-				   for(int j = 0; j < donnees[i].length; j++){
-					   Object testObject = donnees[i][j];
-					   if (testObject!=null) { // si la cellule n'est pas vide
-						   if (testObject instanceof ImageIcon) { // si la cellule contient une image
-							   jTable2.getColumnModel().getColumn(j).setCellRenderer(new ImageRenderer()); // on indique que le contenu de la cellule est une image
-						   }
-					   }
-				   }
+			// on parcours cellule par cellule
+			for(int i = 0; i < donnees.length; i++){
+				for(int j = 0; j < donnees[i].length; j++){
+					Object testObject = donnees[i][j];
+					if (testObject!=null) { // si la cellule n'est pas vide
+						if (testObject instanceof ImageIcon) { // si la cellule contient une image
+							jTable2.getColumnModel().getColumn(j).setCellRenderer(new ImageRenderer()); // on indique que le contenu de la cellule est une image
+						}
+					}
 				}
-			 // Affichage du tableau avec les en tête
+			}
+			// Affichage du tableau avec les en tï¿½te
 
 			jPanelTableau.add(jTable2.getTableHeader());
 			jPanelMain.add(jPanelTableau);
-		    jPanelTableau.add(new JScrollPane(jTable2));
+			jPanelTableau.add(new JScrollPane(jTable2));
 		}
 
 		this.updateUI();
@@ -208,7 +208,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 	}
 
 
-	 public static void creationPieChart(){
+	public static void creationPieChart(){
 
 		piechart = true;
 
@@ -264,7 +264,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			LOGGER.log(Level.SEVERE, "TEST SQL PAS BON");
 			System.out.println("TEST SQL PAS BON");
-			JOptionPane.showMessageDialog(null, "Entrez une bonne requête SQL, patate.");
+			JOptionPane.showMessageDialog(null, "Entrez une bonne requï¿½te SQL, patate.");
 		}
 		return resultatListe;
 
@@ -272,129 +272,80 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 
 	public static String[] titreJtable(String query){
-		String resultatProductCode ="";
-		String resultatProductName="";
-		String resultatProductLine="";
-		String resultatProductVendor="";
-		String resultatDescription="";
-		String resultatQuantity="";
-		String resultatPrice="";
-		String resultatMSRP="";
-
 		java.sql.Statement state;
-
 		try{
-		state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		ResultSet resPC =state.executeQuery(query);
-		ResultSetMetaData metadata = resPC.getMetaData();
-
-		while (resPC.next()){
-			titre = new String[metadata.getColumnCount()];
-
-			for (int i =1; i<=metadata.getColumnCount(); i++){
-
-				if (metadata.getColumnName(i).equals("productCode")){
-					resultatProductCode = resPC.getString("productCode");
-					titre[i-1] = "productCode";
-				}
-				if (metadata.getColumnName(i).equals("productName")){
-					resultatProductName = resPC.getString("productName");
-					titre[i-1] = "productName";
-				}
-				if (metadata.getColumnName(i).equals("productLine")){
-					resultatProductLine = resPC.getString("productLine");
-					titre[i-1] = "productLine";
-				}
-				if (metadata.getColumnName(i).equals("photo")){
-					resultatProductLine = resPC.getString("photo");
-					titre[i-1] = "photo";
-				}
-				if (metadata.getColumnName(i).equals("productVendor")){
-					resultatProductVendor = resPC.getString("productVendor");
-					titre[i-1] = "productVendor";
-				}
-				if (metadata.getColumnName(i).equals("productDescription")){
-					resultatDescription = resPC.getString("productDescription");
-					titre[i-1] = "productDescription";
-				}
-				if (metadata.getColumnName(i).equals("quantityInStock")){
-					resultatQuantity = resPC.getString("quantityInStock");
-					titre[i-1] = "quantityInStock";
-				}
-				if (metadata.getColumnName(i).equals("buyPrice")){
-					resultatPrice = resPC.getString("buyPrice");
-					titre[i-1] ="buyPrice";
-				}
-				if (metadata.getColumnName(i).equals("MSRP")){
-					resultatMSRP = resPC.getString("MSRP");
-					titre[i-1] = "MSRP";
-				}
-
-					System.out.println("affichage du tableau titre " + titre[i-1]);
-			}
-		}
-	} catch (SQLException e) {
-		LOGGER.log(Level.SEVERE, "Exception occur", e);
-		e.printStackTrace();
-	}
-		return titre;
-	}
-
-
-	public static Object[][] donneesJtable(String query){
-
-		java.sql.Statement state;
-
-		try {
-
 			state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			ResultSet resPC =state.executeQuery(query);
 			ResultSetMetaData metadata = resPC.getMetaData();
-			int nbClumn = metadata.getColumnCount();
-			resPC.last();
-			int nbLine = resPC.getRow();
-			resPC.beforeFirst();
-			Object donnees[][] = new Object[nbLine][nbClumn];
-			int j=0,i=0;
-			String[] titre = new String[nbClumn];
-			while(resPC.next())
-			{
-				for(j = 1;j<nbClumn+1;j++)
-				{
-					System.out.println("j est égal à" + j);
-					System.out.println("nombre de colonnes " + nbClumn);
-					System.out.println("test de metadata :" + metadata.getColumnName(j));
-					if (metadata.getColumnName(j).equals("photo")) {
-						System.out.println("toto");
-						if (resPC.getObject(metadata.getColumnName(j))!=null) {
-							System.out.println("titi");
-							Blob blob = resPC.getBlob(j);
 
-							//Transform Blob into ImageIcon
-							BufferedInputStream is = new BufferedInputStream(blob.getBinaryStream());
-							ImageIcon resultatPhoto = new ImageIcon(ImageIO.read(is));
-							donnees[i][j-1] = resultatPhoto;
-						}
-					} else {
-						donnees[i][j-1] = resPC.getObject(metadata.getColumnName(j));
-					}
-
+			while (resPC.next()){
+				titre = new String[metadata.getColumnCount()];
+				for (int i =1; i<=metadata.getColumnCount(); i++){
+					titre[i-1]=metadata.getColumnName(i);
 				}
-				i++;
 			}
-			for(int k = 0;k<nbClumn;k++)
-			{
-				titre[k] = metadata.getColumnName(k+1);
-			}
-
-
-			return donnees;
-
-		} catch (SQLException | IOException e) {
+		} catch (SQLException e) {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			e.printStackTrace();
 		}
-		return null;
-	}
+			return titre;
+		}
 
-}
+
+		public static Object[][] donneesJtable(String query){
+
+			java.sql.Statement state;
+
+			try {
+
+				state = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				ResultSet resPC =state.executeQuery(query);
+				ResultSetMetaData metadata = resPC.getMetaData();
+				int nbClumn = metadata.getColumnCount();
+				resPC.last();
+				int nbLine = resPC.getRow();
+				resPC.beforeFirst();
+				Object donnees[][] = new Object[nbLine][nbClumn];
+				int j=0,i=0;
+				String[] titre = new String[nbClumn];
+				while(resPC.next())
+				{
+					for(j = 1;j<nbClumn+1;j++)
+					{
+						System.out.println("j est ï¿½gal ï¿½" + j);
+						System.out.println("nombre de colonnes " + nbClumn);
+						System.out.println("test de metadata :" + metadata.getColumnName(j));
+						if (metadata.getColumnName(j).equals("photo")) {
+							System.out.println("toto");
+							if (resPC.getObject(metadata.getColumnName(j))!=null) {
+								System.out.println("titi");
+								Blob blob = resPC.getBlob(j);
+
+								//Transform Blob into ImageIcon
+								BufferedInputStream is = new BufferedInputStream(blob.getBinaryStream());
+								ImageIcon resultatPhoto = new ImageIcon(ImageIO.read(is));
+								donnees[i][j-1] = resultatPhoto;
+							}
+						} else {
+							donnees[i][j-1] = resPC.getObject(metadata.getColumnName(j));
+						}
+
+					}
+					i++;
+				}
+				for(int k = 0;k<nbClumn;k++)
+				{
+					titre[k] = metadata.getColumnName(k+1);
+				}
+
+
+				return donnees;
+
+			} catch (SQLException | IOException e) {
+				LOGGER.log(Level.SEVERE, "Exception occur", e);
+				e.printStackTrace();
+			}
+			return null;
+		}
+
+	}
