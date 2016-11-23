@@ -16,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import DAO.GO;
 import GestionLog.MyFormatter;
@@ -50,6 +53,31 @@ public class fenetre extends javax.swing.JFrame {
     	this.setTitle("Interface de gestion de base de donnees");
     	
     	Handler fh;
+    	
+    	try 
+        {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");// Nom du package contenant le Look And Feel.
+            SwingUtilities.updateComponentTreeUI(this); 
+        }
+
+    catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        } // Exception
+    catch (InstantiationException e)
+        {
+            e.printStackTrace();
+        } // Exception
+    catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        } // Exception
+    catch (UnsupportedLookAndFeelException e)
+        {
+            e.printStackTrace();
+        } // Exception
+
+    	
     	try {
     		LOGGER.setUseParentHandlers(false); // POUR NE PAS AFFICHER SUR LA CONSOLE (PAR DEFAUT)
 			fh = new FileHandler("myLog.log", true); // pour envoyer le flux de sortie vers le fichier myLog.log

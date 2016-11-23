@@ -89,7 +89,7 @@ public class DAOProducts extends DAO<Products> {
 			LOGGER.log(Level.INFO, "Requete UPDATE");
 			
 			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ?");		               	
+			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ? ");		               	
 			 pstmt1.execute();
 			pstmt1.setString(1, obj.getProductName());
 			

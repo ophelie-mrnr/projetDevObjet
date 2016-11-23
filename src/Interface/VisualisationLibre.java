@@ -38,7 +38,7 @@ import DAO.MaConnexion;
 
 
 public class VisualisationLibre extends javax.swing.JPanel {
-	
+
 	private static final Logger LOGGER = Logger.getLogger("myLogger");
 
 	// Variables declaration
@@ -64,8 +64,8 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		private static boolean piechart =false;
 
 		// End of variables declaration
-	
-	
+
+
     /**
      * Creates new form NewJPanel
      */
@@ -111,9 +111,11 @@ public class VisualisationLibre extends javax.swing.JPanel {
 	}
 
 	private void enregistrerButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		jPanelPieChart.removeAll();
+		jPanelTableau.removeAll();
 
 		LOGGER.log(Level.INFO, "Le bouton Enregistrer de la page Visualisation libre fait son action");
-		
+
 		// Récupération de la requête de la zone de texte
 		String requete = "";
 		requete = texteRequete.getText();
@@ -126,7 +128,6 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		resultatListeTest =  getResultat(requete);
 
 		// Nous supprimons l'affichage précédent
-		jPanelMain.removeAll();
 
 		// Test si la deuxième liste (donc deuxième colonne du résultat) contient seulement des nombres
 		try{
@@ -143,7 +144,6 @@ public class VisualisationLibre extends javax.swing.JPanel {
 			jPanelPieChart.add(BorderLayout.CENTER,chartPanel);
 			chartPanel.setVisible(true);
 			jPanelPieChart.setVisible(true);
-			jPanelMain.add(jPanelPieChart);
 
 	}
 		catch (Exception e) {
@@ -152,16 +152,16 @@ public class VisualisationLibre extends javax.swing.JPanel {
 
 			// Et on créer alors le tableau qui récupère les deux tableaux : tableau de données et tableau de titres
 
-			
+
 			Object[][] donnees = donneesJtable(requete);
 			Object[] titres = titreJtable(requete);
-		
+
 			 jTable2.setModel(new javax.swing.table.DefaultTableModel(
 					 donnees, titres
-					 	
-			        ));			 
 
-			 
+			        ));
+
+			 // affichage de l'image dans le Jtable
 			 // on parcours cellule par cellule
 			 for(int i = 0; i < donnees.length; i++){
 				   for(int j = 0; j < donnees[i].length; j++){
@@ -264,7 +264,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
 			LOGGER.log(Level.SEVERE, "TEST SQL PAS BON");
 			System.out.println("TEST SQL PAS BON");
-			JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+			JOptionPane.showMessageDialog(null, "Entrez une bonne requête SQL, patate.");
 		}
 		return resultatListe;
 
@@ -308,7 +308,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 				if (metadata.getColumnName(i).equals("photo")){
 					resultatProductLine = resPC.getString("photo");
 					titre[i-1] = "photo";
-				}				
+				}
 				if (metadata.getColumnName(i).equals("productVendor")){
 					resultatProductVendor = resPC.getString("productVendor");
 					titre[i-1] = "productVendor";
@@ -338,8 +338,8 @@ public class VisualisationLibre extends javax.swing.JPanel {
 		e.printStackTrace();
 	}
 		return titre;
-	}	
-	
+	}
+
 
 	public static Object[][] donneesJtable(String query){
 
@@ -369,7 +369,7 @@ public class VisualisationLibre extends javax.swing.JPanel {
 						if (resPC.getObject(metadata.getColumnName(j))!=null) {
 							System.out.println("titi");
 							Blob blob = resPC.getBlob(j);
-							
+
 							//Transform Blob into ImageIcon
 							BufferedInputStream is = new BufferedInputStream(blob.getBinaryStream());
 							ImageIcon resultatPhoto = new ImageIcon(ImageIO.read(is));
