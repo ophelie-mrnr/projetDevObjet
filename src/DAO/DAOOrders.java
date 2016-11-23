@@ -59,12 +59,12 @@ public class DAOOrders extends DAO<Orders> {
 
 	public boolean update(Orders obj) {
 		
-		PreparedStatement pstmt1 = null;
+		/*PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		PreparedStatement pstmt5 = null;
-		PreparedStatement pstmt6 = null;
+		PreparedStatement pstmt6 = null;*/
 
 		try {
 			LOGGER.log(Level.INFO, "Requete UPDATE");

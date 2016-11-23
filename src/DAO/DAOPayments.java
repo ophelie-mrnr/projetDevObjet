@@ -19,7 +19,7 @@ public class DAOPayments extends DAO<Payments> {
 
 	public boolean create(Payments obj) {
 
-		PreparedStatement stmt = null;
+		//PreparedStatement stmt = null;
 		
 		try{
 			LOGGER.log(Level.INFO, "Requete INSERT");
