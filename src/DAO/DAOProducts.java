@@ -76,17 +76,17 @@ public class DAOProducts extends DAO<Products> {
 
 	public boolean update(Products obj) {
 
-		PreparedStatement pstmt1 = null;
+		/*PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		PreparedStatement pstmt5 = null;
 		PreparedStatement pstmt6 = null;
-		PreparedStatement pstmt7 = null;
+		PreparedStatement pstmt7 = null;*/
 
 		try{
 			
-			LOGGER.log(Level.INFO, "Requete UPDATE");
+			LOGGER.log(Level.INFO, "Requete UPDATE");		
 
 			/*pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Products SET productName = ? WHERE productCode = ");
@@ -129,8 +129,8 @@ public class DAOProducts extends DAO<Products> {
 			pstmt7.execute();
 			pstmt7.setLong(1, (long) obj.getMSRP());
 			pstmt7.setString(2, obj.getProductCode());
-*/
-		
+
+		*/
 
 			
             this.connect

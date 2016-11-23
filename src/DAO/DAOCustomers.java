@@ -65,7 +65,7 @@ public class DAOCustomers extends DAO<Customers> {
 
 	public boolean update(Customers obj) {
 
-		PreparedStatement pstmt1 = null;
+		/*PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
@@ -73,7 +73,7 @@ public class DAOCustomers extends DAO<Customers> {
 		PreparedStatement pstmt6 = null;
 		PreparedStatement pstmt7 = null;
 		PreparedStatement pstmt8 = null;
-		PreparedStatement pstmt9 = null;
+		PreparedStatement pstmt9 = null;*/
 		
 		try{
 			LOGGER.log(Level.INFO, "Requete UPDATE");
