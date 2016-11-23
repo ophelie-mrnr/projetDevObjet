@@ -13,7 +13,7 @@ public class CreationBDD {
 
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;
 	public static final String USER = "root" ;
-	public static final String PASS = "" ;
+	public static final String PASS = "root" ;
 	
 	public static Statement stmt1 = null;
 

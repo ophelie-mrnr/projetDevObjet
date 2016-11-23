@@ -49,7 +49,7 @@ public class TimeSeriePanel{
 		java.sql.Statement state2;
 		ArrayList<String> liste = new ArrayList<String>();
 
-		int revenu =0;
+		double revenu =0;
 		int jourDeb =0 , moisDeb =0 , anneeDeb=0;
 		int jourFin=0, moisFin=0, anneeFin=0;
 
@@ -83,7 +83,7 @@ public class TimeSeriePanel{
 				String query = "SELECT orderDate FROM orders;";
 				ResultSet res0 =state.executeQuery(query);
 				while (res0.next()){
-				dateFin = res0.getString(1);
+					dateFin = res0.getString(1);
 				}
 			}
 			catch (SQLException e) {
@@ -106,7 +106,6 @@ public class TimeSeriePanel{
 		dateFin = suivant(jourToInt(dateFin),moisToInt(dateFin),anneeToInt(dateFin));
 
 
-		// Faire PAYS
 		if (pays=="All"){
 			while(dateDeb.equals(dateFin)==false){
 				try {
@@ -125,14 +124,14 @@ public class TimeSeriePanel{
 					if (liste.size()!=0){
 						for (int i = 0; i<liste.size(); i++){
 							try{
-								ArrayList<Integer> listePrix = new ArrayList<Integer>();
+								ArrayList<Double> listePrix = new ArrayList<Double>();
 								ArrayList<Integer> listeQuantite = new ArrayList<Integer>();
 								state1 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 								String query1 = "SELECT priceEach FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
 								ResultSet res1 =	state1.executeQuery(query1);
 
 								while (res1.next()){
-									int resultatPrix = res1.getInt("priceEach");
+									double resultatPrix = res1.getDouble("priceEach");
 									listePrix.add(resultatPrix);
 								}
 								try{
@@ -187,8 +186,8 @@ public class TimeSeriePanel{
 				ArrayList<String> listeCustomersNumber = new ArrayList<String>();
 
 				while (res0.next()){
-					String resultatPays = res0.getString("customerNumber");
-					listeCustomersNumber.add(resultatPays);
+					String resultatPaysCustomer = res0.getString("customerNumber");
+					listeCustomersNumber.add(resultatPaysCustomer);
 				}
 				while(dateDeb.equals(dateFin)==false){
 					try {
@@ -205,44 +204,45 @@ public class TimeSeriePanel{
 								String resultat = res.getString("orderNumber");
 								liste.add(resultat);
 							}
-						}
-						if (liste.size()!=0){
-							for (int i = 0; i<liste.size(); i++){
-								try{
-									ArrayList<Integer> listePrix = new ArrayList<Integer>();
-									ArrayList<Integer> listeQuantite = new ArrayList<Integer>();
-									state1 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-									String query1 = "SELECT priceEach FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
-									ResultSet res1 =	state1.executeQuery(query1);
-
-									while (res1.next()){
-										int resultatPrix = res1.getInt("priceEach");
-										listePrix.add(resultatPrix);
-									}
+							if (liste.size()!=0){
+								for (int i = 0; i<liste.size(); i++){
 									try{
-										state2 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-										String query2 = "SELECT quantityOrdered FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
-										ResultSet res2 =state2.executeQuery(query2);
+										ArrayList<Double> listePrix = new ArrayList<Double>();
+										ArrayList<Integer> listeQuantite = new ArrayList<Integer>();
+										state1 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+										String query1 = "SELECT priceEach FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
+										ResultSet res1 =	state1.executeQuery(query1);
 
-										while (res2.next()){
-											int resultatQuantite = res2.getInt("quantityOrdered");
-											listeQuantite.add(resultatQuantite);
+										while (res1.next()){
+											double resultatPrix = res1.getDouble("priceEach");
+											listePrix.add(resultatPrix);
 										}
-										revenu = 0;
-										for(int j =0; j<listePrix.size(); j++){
-											revenu += (listePrix.get(j)*listeQuantite.get(j));
-										}
+										try{
+											state2 = MaConnexion.getInstance().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+											String query2 = "SELECT quantityOrdered FROM Orderdetails WHERE orderNumber= '"+liste.get(i)+"';";
+											ResultSet res2 =state2.executeQuery(query2);
 
+											while (res2.next()){
+												int resultatQuantite = res2.getInt("quantityOrdered");
+												listeQuantite.add(resultatQuantite);
+											}
+											revenu = 0;
+											for(int j =0; j<listePrix.size(); j++){
+												revenu += (listePrix.get(j)*listeQuantite.get(j));
+											}
+
+										}
+										catch (SQLException e3){
+											LOGGER.log(Level.SEVERE, "Exception occur", e3);
+											e3.printStackTrace();
+										}
 									}
-									catch (SQLException e3){
-										LOGGER.log(Level.SEVERE, "Exception occur", e3);
-										e3.printStackTrace();
+									catch (SQLException e2) {
+										LOGGER.log(Level.SEVERE, "Exception occur", e2);
+										e2.printStackTrace();
 									}
 								}
-								catch (SQLException e2) {
-									LOGGER.log(Level.SEVERE, "Exception occur", e2);
-									e2.printStackTrace();
-								}
+
 							}
 						}
 					}
@@ -262,10 +262,12 @@ public class TimeSeriePanel{
 					anneeFin = anneeToInt(dateFin);
 				}
 			}
+
 			catch (SQLException e) {
 				LOGGER.log(Level.SEVERE, "Exception occur", e);
 				e.printStackTrace();
 			}
+
 		}
 		return timeSeries;
 	}
