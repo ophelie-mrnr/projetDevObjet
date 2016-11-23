@@ -68,52 +68,52 @@ public class DAOOrders extends DAO<Orders> {
 
 		try {
 			LOGGER.log(Level.INFO, "Requete UPDATE");
-			
+			/*
 			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET orderDate = ? WHERE orderNumber = ? ");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Orders SET orderDate = ? WHERE orderNumber = ? ");
 			pstmt1.setString(1, obj.getOrderDate());
 			pstmt1.setLong(2, obj.getOrderNumber());
 			pstmt1.executeUpdate();
 			
 			pstmt2 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET requiredDate = ? WHERE orderNumber = ? ");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Orders SET requiredDate = ? WHERE orderNumber = ? ");
 			pstmt2.setString(1, obj.getRequiredDate());
 			pstmt2.setLong(2, obj.getOrderNumber());
 			pstmt2.executeUpdate();
 			
 			pstmt3 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET shippedDate = ? WHERE orderNumber = ? ");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Orders SET shippedDate = ? WHERE orderNumber = ? ");
 			pstmt3.setString(1, obj.getShippedDate());
 			pstmt3.setLong(2, obj.getOrderNumber());
 			pstmt3.executeUpdate();
 		
 			pstmt4 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET getStatus = ? WHERE orderNumber = ? ");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Orders SET getStatus = ? WHERE orderNumber = ? ");
 			pstmt4.setString(1, obj.getStatus());
 			pstmt4.setLong(2, obj.getOrderNumber());
 			pstmt4.executeUpdate();
 			
 			pstmt5 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET comments = ? WHERE orderNumber = ? ");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Orders SET comments = ? WHERE orderNumber = ? ");
 			pstmt5.setString(1, obj.getComments());
 			pstmt5.setLong(2, obj.getOrderNumber());
 			pstmt5.executeUpdate();
 			
 			pstmt6 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerNumber = ? WHERE orderNumber = ? ");
+		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Orders SET customerNumber = ? WHERE orderNumber = ? ");
 			pstmt6.setLong(1, obj.getCustomerNumber());
 			pstmt6.setLong(2, obj.getOrderNumber());
 			pstmt6.executeUpdate();
-							
+				*/		
 			
 			
-			/*
+			
             this .connect	
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE
                  ).executeUpdate(
-                	"UPDATE Customers SET orderDate = '" + obj.getOrderDate()+ "'"
+                	"UPDATE Orders SET orderDate = '" + obj.getOrderDate()+ "'"
                 					+ ", requiredDate = '"+obj.getRequiredDate()+"'"
                 					+ ", shippedDate = '"+obj.getShippedDate()+"'"
                 					+ ", getStatus = '"+obj.getStatus()+"'"
@@ -121,7 +121,7 @@ public class DAOOrders extends DAO<Orders> {
                         			+ ", customerNumber = '"+obj.getCustomerNumber()
                 					+" WHERE orderNumber = '" + obj.getOrderNumber()+"'"
                  );
-                 */
+                 
 		obj = this.find(obj.getOrderNumber());
 		return true;
     } catch (SQLException e) {

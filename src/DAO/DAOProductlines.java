@@ -23,18 +23,19 @@ public class DAOProductlines extends DAO<Productlines> {
 		try{
 			LOGGER.log(Level.INFO, "Requete INSERT");
 			
-			stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			/*stmt = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		               ResultSet.CONCUR_UPDATABLE)).prepareStatement("INSERT INTO Productlines VALUES (?, ?)");
 			stmt.setString(1, obj.getProductLine());
 			stmt.setString(2, obj.getTextDescription());	
 			
 			stmt.execute();
-			/*
+			*/
+			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
                ResultSet.CONCUR_UPDATABLE).executeUpdate("INSERT INTO Productlines "
 						+ "VALUES (obj.getProductLine(),"
 						+ "obj.getTextDescription()");
-			 */
+			 
 		}
 		catch(Exception e){
 			LOGGER.log(Level.SEVERE, "Exception occur", e);
@@ -49,7 +50,7 @@ public class DAOProductlines extends DAO<Productlines> {
 			LOGGER.log(Level.INFO, "Requete DELETE");
 			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE productLine ="
+					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM Productlines WHERE productLine ="
 							+ obj.getProductLine());
 			return true;
 		}
@@ -70,7 +71,7 @@ public class DAOProductlines extends DAO<Productlines> {
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE
                  ).executeUpdate(
-                	"UPDATE Customers SET textDescription = '" + obj.getTextDescription()+ "'"
+                	"UPDATE Productlines SET textDescription = '" + obj.getTextDescription()+ "'"
                 					+" WHERE productLine = '"+obj.getProductLine()+"'"
                 	
                  );

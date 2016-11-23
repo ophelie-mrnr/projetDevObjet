@@ -13,7 +13,7 @@ public class CreationBDD {
 
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver" ;
 	public static final String USER = "root" ;
-	public static final String PASS = "root" ;
+	public static final String PASS = "" ;
 	
 	public static Statement stmt1 = null;
 
@@ -46,7 +46,7 @@ public class CreationBDD {
 			    }
 			    System. out.println( "La base de donnees est deja cree !" );
 			
-			    // Si la base de données n'existe pas
+			    // Si la base de donnees n'existe pas
 			if (exist==false){
 				
 			String sq = "CREATE DATABASE schemadevobj" ;

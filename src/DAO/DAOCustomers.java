@@ -77,7 +77,7 @@ public class DAOCustomers extends DAO<Customers> {
 		try{
 			LOGGER.log(Level.INFO, "Requete UPDATE");
 			
-			pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+			/*pstmt1 = ((Connection) this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 			               ResultSet.CONCUR_UPDATABLE)).prepareStatement("UPDATE Customers SET customerName = ? WHERE customerNumber = ?");		               	
 			 pstmt1.executeUpdate();
 			pstmt1.setString(1, obj.getCustomerName());
@@ -131,9 +131,9 @@ public class DAOCustomers extends DAO<Customers> {
 			pstmt9.setLong(1, obj.getSalesRepEmployeeNumber());	
 			pstmt9.setLong(2, obj.getCustomerNumber());
 			 
-			
+			*/
 			 
-			 /*
+			 
             this .connect
                  .createStatement(
                 	ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -150,7 +150,7 @@ public class DAOCustomers extends DAO<Customers> {
                 					+ ", salesRepEmployeeNumber = '"+obj.getSalesRepEmployeeNumber()
                 					+" WHERE customerNumber = '" + obj.getCustomerNumber()+"'"
                  );
-                 */
+                 
 			 
 		obj = this.find(obj.getCustomerNumber());
 		return true;
