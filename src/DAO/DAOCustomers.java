@@ -48,6 +48,7 @@ public class DAOCustomers extends DAO<Customers> {
 		PreparedStatement pstmt = null;
 		
 		try{
+			LOGGER.log(Level.INFO, "Requete DELETE");
 			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE CustomerNumber ="

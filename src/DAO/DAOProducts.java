@@ -63,7 +63,7 @@ public class DAOProducts extends DAO<Products> {
 			LOGGER.log(Level.INFO, "Requete DELETE");
 
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE productCode ="
+					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM products WHERE productCode ="
 							+ obj.getProductCode());
 			return true;
 		}
@@ -170,7 +170,7 @@ public class DAOProducts extends DAO<Products> {
 		ImageIcon icon = null;
 
 		try{
-
+			
 			ResultSet result = this.connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Products where productCode = '" + id+ "';");

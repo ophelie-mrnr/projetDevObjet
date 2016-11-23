@@ -66,7 +66,7 @@ public class DAOEmployees extends DAO<Employees> {
                 	ResultSet.TYPE_SCROLL_INSENSITIVE, 
                     ResultSet.CONCUR_UPDATABLE
                  ).executeUpdate(
-                	"UPDATE Customers SET lastName = '" + obj.getLastName() + "'"
+                	"UPDATE Employees SET lastName = '" + obj.getLastName() + "'"
                 					+ ", fisrtName = '"+obj.getFirstName()+"'"
                 					+ ", email = '"+obj.getEmail()+"'"
                 					+ ", officeCode = '"+ obj.getOfficeCode()+"'"

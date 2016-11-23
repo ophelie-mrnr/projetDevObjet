@@ -44,7 +44,7 @@ public class DAOOffices extends DAO<Offices> {
 			LOGGER.log(Level.INFO, "Requete DELETE");
 			
 			this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM customers WHERE officeCode ="
+					ResultSet.CONCUR_UPDATABLE).executeQuery("DELETE FROM Offices WHERE officeCode ="
 							+ obj.getOfficeCode());
 			return true;
 		}
